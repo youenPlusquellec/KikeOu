@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.util.Log
+import android.widget.ImageView
 import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import net.glxn.qrgen.android.QRCode
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,10 @@ class MainActivity : AppCompatActivity() {
         val json : String = jsonAdapter.toJson(agenda)
 
         Log.d("BITE", json)
+
+        /*val myBitmap = QRCode.from(json).bitmap()
+        val myImage = findViewById<ImageView>(R.id.image_qr)
+        myImage.setImageBitmap(myBitmap)*/
 
 
 
