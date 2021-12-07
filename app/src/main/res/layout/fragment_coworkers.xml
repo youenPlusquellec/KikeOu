@@ -17,7 +17,8 @@
         android:src="@drawable/ic_qrcode_scanner_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="64dp"
+        app:maxImageSize="@dimen/icon_size"
+        android:contentDescription="@string/default_description"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ScrollView

@@ -6,9 +6,12 @@
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_person_background.xml" value="0.26614583333333336" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_person_foreground.xml" value="0.26614583333333336" />
+        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_background.xml" value="0.18125" />
+        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_foreground.xml" value="0.18125" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_scanner_background.xml" value="0.20260416666666667" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_scanner_foreground.xml" value="0.20260416666666667" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/coworker_item_view.xml" value="0.264" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/fragment_blank.xml" value="0.18802083333333333" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/fragment_coworkers.xml" value="0.264" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
