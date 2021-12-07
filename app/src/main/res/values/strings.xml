@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">KikeOu</string>
+    <string name="profile_title">Mon profil</string>
+    <string name="coworkers_title">Mes collègues</string>
+    <string name="bottom_nav_menu_profile">Mon profil</string>
+    <string name="bottom_nav_menu_coworkers">Mes collègues</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_text">Nom : </string>
+    <string name="name_hint">Mon nom</string>
+    <string name="contact_text">Moyen de contact : </string>
+    <string name="loc_text">Localisation : </string>
 </resources>

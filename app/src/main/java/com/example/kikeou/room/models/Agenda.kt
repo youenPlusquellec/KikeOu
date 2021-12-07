@@ -19,5 +19,8 @@ data class Agenda(
     @ColumnInfo(name="contact") val contact : List<Contact>,
 
     @TypeConverters(ListLocalisationConverter::class)
-    @ColumnInfo(name="loc") val loc : List<Localisation>
+    @ColumnInfo(name="loc") val loc : List<Localisation>,
+
+    @Transient
+    @ColumnInfo(name="is_mine") val is_mine : Boolean = false,
 )

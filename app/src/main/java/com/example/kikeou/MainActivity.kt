@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val contact1 = Contact(1, "tel", "0699328234")
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
 
-        val agenda = Agenda(1, 50, "unephoto", listOf(contact1, contact2), listOf(loc1, loc2))
+        val agenda = Agenda(1, 50, "unephoto", listOf(contact1, contact2), listOf(loc1, loc2), true)
 
 
         val moshi: Moshi = Moshi.Builder().build()
