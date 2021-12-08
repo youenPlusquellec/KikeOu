@@ -10,6 +10,6 @@ import com.squareup.moshi.JsonClass
 data class Localisation(
     @Transient
     @ColumnInfo(name="id") @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name="day") val day: String,
+    @ColumnInfo(name="day") val day: Int = 1,
     @ColumnInfo(name="value") val value: String
 )

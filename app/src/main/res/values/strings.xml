@@ -7,7 +7,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_text">Nom : </string>
     <string name="name_hint">Mon nom</string>
+    <string name="week_hint">Semaine</string>
     <string name="contact_text">Moyen de contact : </string>
     <string name="loc_text">Localisation : </string>
     <string name="default_description">description</string>
+    <string name="puce">&#8226;</string>
+    <string name="day1">Lundi</string>
+    <string name="day2">Mardi</string>
+    <string name="day3">Mercredi</string>
+    <string name="day4">Jeudi</string>
+    <string name="day5">Vendredi</string>
 </resources>

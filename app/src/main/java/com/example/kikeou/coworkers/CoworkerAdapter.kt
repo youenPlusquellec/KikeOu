@@ -11,14 +11,14 @@ import com.example.kikeou.R
 import com.example.kikeou.room.models.Agenda
 import org.w3c.dom.Text
 
-class CoworkerAdapter : RecyclerView.Adapter<CoworkerAdapter.ViewHolder>()  {
+class CoworkerAdapter : RecyclerView.Adapter<CoworkerAdapter.ViewHolder>() {
 
+    private lateinit var mListener: onItemClickListener
     var data =  listOf<Agenda>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-    private lateinit var mListener: onItemClickListener
 
     interface onItemClickListener {
 

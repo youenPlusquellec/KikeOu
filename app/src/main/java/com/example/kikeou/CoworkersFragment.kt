@@ -37,8 +37,8 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loc1 = Localisation(1,"18 mai", "dans ton cul")
-        val loc2 = Localisation(2,"8 aout", "dans le cul de youen")
+        val loc1 = Localisation(1,1, "dans ton cul")
+        val loc2 = Localisation(2,3, "dans le cul de youen")
         val contact1 = Contact(1, "tel", "06.99.32.82.34")
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
         val agenda = Agenda(1, "maman" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)

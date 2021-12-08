@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        val loc1 = Localisation(1,"18 mai", "dans ton cul")
-        val loc2 = Localisation(2,"8 aout", "dans le cul de youen")
+        val loc1 = Localisation(1, 1, "dans ton cul")
+        val loc2 = Localisation(2, 3, "dans le cul de youen")
 
         val contact1 = Contact(1, "tel", "0699328234")
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
