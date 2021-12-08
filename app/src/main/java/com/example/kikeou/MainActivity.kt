@@ -29,10 +29,11 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.person->setCurrentFragment(profileFragment)
                 R.id.group->setCurrentFragment(coworkersFragment)
-
             }
             true
         }
+
+
         val loc1 = Localisation(1, 1, "dans ton cul")
         val loc2 = Localisation(2, 3, "dans le cul de youen")
 
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         val json : String = jsonAdapter.toJson(agenda)
 
         Log.d("BITE", json)
+
 
         /*val myBitmap = QRCode.from(json).bitmap()
         val myImage = findViewById<ImageView>(R.id.image_qr)

@@ -1,10 +1,12 @@
 package com.example.kikeou
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import com.example.kikeou.coworkers.CoworkerAdapter
 import com.example.kikeou.databinding.FragmentCoworkersBinding
@@ -52,6 +54,16 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
         val locAdapter = LocalisationAdapter()
         binding.localisationsList.adapter = locAdapter
         locAdapter.data = agenda.loc
+
+        binding.addContactButton.setOnClickListener {
+            val intent = Intent(activity, AddContactActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.addLocButton.setOnClickListener {
+            val intent = Intent(activity, AddLocalisationActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

@@ -16,4 +16,7 @@ interface AgendaDao {
 
     @Delete
     fun delete(agenda: Agenda)
+
+    @Query("SELECT * FROM agenda WHERE is_mine IS TRUE;")
+    fun getMyAgenda(): Agenda
 }

@@ -10,6 +10,8 @@
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_foreground.xml" value="0.18125" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_scanner_background.xml" value="0.20260416666666667" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_qrcode_scanner_foreground.xml" value="0.20260416666666667" />
+        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/activity_add_contact.xml" value="0.2" />
+        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/activity_add_localisation.xml" value="0.2" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/coworker_item_view.xml" value="0.264" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/fragment_blank.xml" value="0.18802083333333333" />
@@ -17,7 +19,7 @@
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/fragment_profiles_details.xml" value="0.18802083333333333" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/home_page.xml" value="0.176" />
-        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/profile_item_view.xml" value="0.536" />
+        <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/profile_item_view.xml" value="0.264" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/layout/text_item_view.xml" value="0.16510416666666666" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2359375" />
       </map>
