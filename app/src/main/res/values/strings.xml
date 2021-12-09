@@ -1,4 +1,45 @@
 <resources>
     <string name="app_name">KikeOu</string>
     <string name="permissionToGrant">you have to grant camera permission to use this sample</string>
+    <string name="profile_title">Mon profil</string>
+    <string name="coworkers_title">Mes collègues</string>
+    <string name="add_contact_title">Ajouter un contact</string>
+    <string name="add_localisation_title">Ajouter une localisation</string>
+    <string name="bottom_nav_menu_profile">Mon profil</string>
+    <string name="bottom_nav_menu_coworkers">Mes collègues</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_text">Nom : </string>
+    <string name="name_hint">Mon nom</string>
+    <string name="add_contact_hint">Add contact</string>
+    <string name="add_localisation_hint">Add localisation</string>
+    <string name="week_hint">Semaine</string>
+    <string name="contact_text">Moyen de contact : </string>
+    <string name="loc_text">Localisation : </string>
+    <string name="default_description">description</string>
+    <string name="puce">&#8226;</string>
+    <string name="day1">Lundi</string>
+    <string name="day2">Mardi</string>
+    <string name="day3">Mercredi</string>
+    <string name="day4">Jeudi</string>
+    <string name="day5">Vendredi</string>
+    <string name="qr_gen_desc">Generate QR Code</string>
+    <string name="qr_read_desc">Read Qr Code</string>
+    <string-array name="contact_key_array">
+        <item>telephone</item>
+        <item>email</item>
+        <item>facebook</item>
+        <item>twitter</item>
+        <item>linkedin</item>
+        <item>skype</item>
+        <item>site web</item>
+        <item>autre</item>
+    </string-array>
+    <string-array name="loc_days_array">
+        <item>Lundi</item>
+        <item>Mardi</item>
+        <item>Mercredi</item>
+        <item>Jeudi</item>
+        <item>Vendredi</item>
+    </string-array>
+    <string name="add">Ajouter</string>
 </resources>
