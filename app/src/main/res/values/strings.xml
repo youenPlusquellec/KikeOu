@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KikeOu</string>
+    <string name="permissionToGrant">you have to grant camera permission to use this sample</string>
 </resources>
