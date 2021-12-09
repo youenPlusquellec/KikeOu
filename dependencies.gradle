@@ -27,7 +27,7 @@ static def addRepos(RepositoryHandler handler) {
 ext.addRepos = this.&addRepos
 
 def build_versions = [:]
-    build_versions.app_id = "fr.enssat.kikekou"
+    build_versions.app_id = "com.example.kikeou"
     build_versions.min_sdk = 30
     build_versions.target_sdk = 31
     build_versions.compil_sdk = 31
@@ -72,6 +72,28 @@ deps.core = "androidx.core:core-ktx:1.5.0"
 
 versions.junit = "4.12"
 deps.junit = "junit:junit:$versions.junit"
+
+versions.room = "2.3.0"
+deps.room = "androidx.room:room-runtime:$versions.room"
+deps.room_coroutine = "androidx.room:room-ktx:$versions.room"
+
+versions.moshi = "1.12.0"
+deps.moshi = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+
+versions.cardview = "1.0.0"
+versions.recyleview = "1.1.0"
+versions.imageview = "3.1.0"
+
+deps.cardview = "androidx.cardview:cardview:$versions.cardview"
+deps.recycleview = "androidx.recyclerview:recyclerview:$versions.recycleview"
+deps.imageview = "de.hdodenhof:circleimageview:$versions.imageview"
+
+
+def kapt = [:]
+    kapt.room = "androidx.room:room-compiler:$versions.room"
+    kapt.moshi = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+deps.kapt = kapt
+
 
 def test = [:]
     versions.ext_junit = "1.1.2"

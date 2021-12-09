@@ -14,21 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KikeOu"
         android:hardwareAccelerated="true">
+        <activity android:name=".AddLocalisationActivity" />
+        <activity android:name=".AddContactActivity" />
         <activity
-            android:name=".AddLocalisationActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddContactActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity" />
-        <activity android:name=".CameraActivity" android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CameraActivity" />
     </application>
 
 </manifest>

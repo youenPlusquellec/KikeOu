@@ -1,32 +1,35 @@
 package com.example.kikeou
 
+//Naming convention: camera_layout.xml layout -> CameraLayoutBinding
+import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
+import android.os.Bundle
 import android.util.Log
 import android.util.Size
 import android.view.View
 import android.widget.Toast
-import androidx.camera.core.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import com.example.kikeou.databinding.CameraLayoutBinding
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.objects.ObjectDetection
-import com.google.mlkit.vision.objects.ObjectDetector
-import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
-
-//Naming convention: camera_layout.xml layout -> CameraLayoutBinding
-import com.example.kikeou.databinding.CameraLayoutBinding
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 
 
 class CameraActivity : AppCompatActivity() {
@@ -70,7 +73,6 @@ class CameraActivity : AppCompatActivity() {
 
     //Only the original thread that created a view can touch its views.
     private fun initCameraAndTF() = binding.previewView.post {
-
         val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient(
             BarcodeScannerOptions.Builder()
                 .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
@@ -107,11 +109,30 @@ class CameraActivity : AppCompatActivity() {
                             Log.e("ScannerActivity", "Error: $it.message")
                             imageProxy.close()
                         }.addOnSuccessListener { barcodes ->
+                            var found = false
+
                             for (it in barcodes) {
-                                if(it.rawValue != null)
-                                    Log.d("KIKEOU", it.rawValue)
+                                if(it.displayValue != null)
+                                {
+                                    found = true
+
+                                    if(binding.layout.childCount > 1)  {
+                                        binding.layout.removeViewAt(1)
+                                    }
+
+                                    val element = Draw(this, it.boundingBox)
+                                    binding.layout.addView(element,1)
+
+                                    val data = Intent()
+                                    data.putExtra("json", it.displayValue)
+
+                                    setResult(Activity.RESULT_OK, data)
+                                }
                             }
                             imageProxy.close()
+
+                            if(found)
+                                finish()
                         }
                     }
                 })
@@ -130,9 +151,8 @@ class CameraActivity : AppCompatActivity() {
         )
     }
 
-    private class Draw(context: Context?, var rect: Rect, var text: String) : View(context) {
+    private class Draw(context: Context?, var rect: Rect) : View(context) {
         lateinit var paint: Paint
-        lateinit var textPaint: Paint
 
         init {
             init()
@@ -140,19 +160,13 @@ class CameraActivity : AppCompatActivity() {
 
         private fun init() {
             paint = Paint()
-            paint.color = Color.RED
+            paint.color = Color.BLUE
             paint.strokeWidth = 20f
             paint.style = Paint.Style.STROKE
-
-            textPaint = Paint()
-            textPaint.color = Color.RED
-            textPaint.style = Paint.Style.FILL
-            textPaint.textSize = 80f
         }
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            canvas.drawText(text, rect.centerX().toFloat(), rect.centerY().toFloat(), textPaint)
             canvas.drawRect(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat(), paint)
         }
     }
