@@ -1,5 +1,6 @@
 package com.example.kikeou
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +15,8 @@ import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 
 /**
  * A simple [Fragment] subclass.
@@ -52,7 +55,14 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
         binding.coworkersList.adapter = adapter
         adapter.setOnItemClickListener(object : CoworkerAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(context, "You clicked on n°$position", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, ProfileDetailsActivity::class.java)
+
+                val moshi: Moshi = Moshi.Builder().build()
+                val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
+                val json : String = jsonAdapter.toJson(adapter.data[position])
+
+                intent.putExtra("agenda", json);
+                startActivity(intent)
             }
 
         })
