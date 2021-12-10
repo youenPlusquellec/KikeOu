@@ -151,7 +151,7 @@ class CameraActivity : AppCompatActivity() {
         )
     }
 
-    private class Draw(context: Context?, var rect: Rect) : View(context) {
+    private class Draw(context: Context?, val rect: Rect?) : View(context) {
         lateinit var paint: Paint
 
         init {
@@ -167,7 +167,9 @@ class CameraActivity : AppCompatActivity() {
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            canvas.drawRect(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat(), paint)
+
+            if(rect != null)
+                canvas.drawRect(rect.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.bottom.toFloat(), paint)
         }
     }
 }
