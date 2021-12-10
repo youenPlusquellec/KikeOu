@@ -7,18 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.room.Room
 import com.example.kikeou.coworkers.CoworkerAdapter
 import com.example.kikeou.databinding.FragmentCoworkersBinding
 import com.example.kikeou.databinding.FragmentProfileBinding
 import com.example.kikeou.profile.ContactAdapter
 import com.example.kikeou.profile.LocalisationAdapter
+import com.example.kikeou.room.AppDatabase
 import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -41,11 +46,11 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loc1 = Localisation(1,1, "dans ton cul")
-        val loc2 = Localisation(2,3, "dans le cul de youen")
-        val contact1 = Contact(1, "tel", "06.99.32.82.34")
-        val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
-        val agenda = Agenda(1, "moi zebi" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
+        var agenda : Agenda = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().getMyAgenda()
+
+        binding.nameZone.setText(agenda.name)
+        binding.weekZone.setText(agenda.week.toString())
+        binding.photoZone.setText(agenda.photo)
 
         val contactAdapter = ContactAdapter()
         binding.contactsList.adapter = contactAdapter
@@ -63,6 +68,14 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
         binding.addLocButton.setOnClickListener {
             val intent = Intent(activity, AddLocalisationActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.validateButton.setOnClickListener {
+            agenda.name = binding.nameZone.text.toString()
+            agenda.week = binding.weekZone.text.toString().toInt()
+            agenda.photo = binding.photoZone.text.toString()
+            Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().update(agenda)
+            Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
         }
     }
 

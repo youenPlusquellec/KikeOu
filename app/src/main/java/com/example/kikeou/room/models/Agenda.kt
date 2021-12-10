@@ -12,16 +12,16 @@ import com.squareup.moshi.JsonClass
 @Entity
 data class Agenda(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name="name") val name: String,
-    @ColumnInfo(name="week") val week: Int,
-    @ColumnInfo(name="photo") val photo: String,
+    @ColumnInfo(name="name") var name: String,
+    @ColumnInfo(name="week") var week: Int,
+    @ColumnInfo(name="photo") var photo: String,
 
     @TypeConverters(ListContactConverter::class)
-    @ColumnInfo(name="contact") val contact : List<Contact>,
+    @ColumnInfo(name="contact") var contact : List<Contact>,
 
     @TypeConverters(ListLocalisationConverter::class)
-    @ColumnInfo(name="loc") val loc : List<Localisation>,
+    @ColumnInfo(name="loc") var loc : List<Localisation>,
 
     @Transient
-    @ColumnInfo(name="is_mine") val is_mine : Boolean = false,
+    @ColumnInfo(name="is_mine") var is_mine : Boolean = false,
 )
