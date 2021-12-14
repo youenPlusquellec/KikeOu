@@ -20,22 +20,25 @@ class AddContactActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.Add_button).setOnClickListener {
             val key : String = findViewById<Spinner>(R.id.contact_key).getSelectedItem().toString()
-            Log.d("key",key)
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
-            Log.d("value", value)
 
             val contact = Contact(0, key, value)
             val agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
                 .allowMainThreadQueries().build().agendaDao().getMyAgenda()
 
             val contacts : MutableList<Contact> = mutableListOf()
+            var newContactAlreadyHere : Boolean = false
             agenda.contact.forEach(){
-                contacts.add(it)
+                if(it.key == key){
+                    contacts.add(contact)
+                    newContactAlreadyHere = true
+                }else {
+                    contacts.add(it)
+                }
             }
-
-            contacts.add(contact)
-
-            Log.d("BITE", Collections.unmodifiableList(contacts).toString())
+            if(!newContactAlreadyHere) {
+                contacts.add(contact)
+            }
 
             agenda.contact = Collections.unmodifiableList(contacts)
             Room.databaseBuilder(this, AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().update(agenda)

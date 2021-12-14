@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KikeOu">
         <activity
+            android:name=".QRCodeGenActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddLocalisationActivity"
             android:exported="true" />
         <activity

@@ -70,6 +70,11 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             startActivity(intent)
         }
 
+        binding.qrGenButton.setOnClickListener{
+            val intent = Intent(activity, QRCodeGenActivity::class.java);
+            startActivity(intent)
+        }
+
         binding.validateButton.setOnClickListener {
             agenda.name = binding.nameZone.text.toString()
             agenda.week = binding.weekZone.text.toString().toInt()

@@ -28,7 +28,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
+        /*var agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
+            .allowMainThreadQueries().build().agendaDao().getMyAgenda()
+        Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
+            .allowMainThreadQueries().build().agendaDao().delete(agenda)*/
+        val agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
             .allowMainThreadQueries().build().agendaDao().getMyAgenda()
 
 
