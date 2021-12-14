@@ -28,8 +28,7 @@ class AddLocalisationActivity : AppCompatActivity() {
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
 
             val localisation = Localisation(0, day, value)
-            val agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
-                .allowMainThreadQueries().build().agendaDao().getMyAgenda()
+            val agenda : Agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
 
             val localisations : MutableList<Localisation> = mutableListOf()
             var newContactAlreadyHere : Boolean = false
@@ -46,7 +45,7 @@ class AddLocalisationActivity : AppCompatActivity() {
             }
 
             agenda.loc = Collections.unmodifiableList(localisations)
-            Room.databaseBuilder(this, AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().update(agenda)
+            AppDatabase.getDatabase(this).agendaDao().update(agenda)
             finish()
 
             finish()

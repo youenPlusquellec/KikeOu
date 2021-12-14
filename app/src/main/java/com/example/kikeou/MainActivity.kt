@@ -32,14 +32,13 @@ class MainActivity : AppCompatActivity() {
             .allowMainThreadQueries().build().agendaDao().getMyAgenda()
         Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
             .allowMainThreadQueries().build().agendaDao().delete(agenda)*/
-        val agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
-            .allowMainThreadQueries().build().agendaDao().getMyAgenda()
+        val agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
 
 
         if (agenda == null){
             Log.d("Mon agenda","Y'a R fraire")
             val myAgenda : Agenda = Agenda(0, "Unknown", 0, "votrephoto", listOf<Contact>(), listOf<Localisation>(), true)
-            Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().insert(myAgenda)
+            AppDatabase.getDatabase(this).agendaDao().insert(myAgenda)
         }else{
             Log.d("Mon agenda", agenda.name)
             val moshi: Moshi = Moshi.Builder().build()

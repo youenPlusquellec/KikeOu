@@ -23,6 +23,7 @@ import com.example.kikeou.room.models.Localisation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import java.lang.NumberFormatException
 import java.util.*
 
 /**
@@ -46,7 +47,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var agenda : Agenda = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().getMyAgenda()
+        var agenda : Agenda = AppDatabase.getDatabase(requireContext()).agendaDao().getMyAgenda()
 
         binding.nameZone.setText(agenda.name)
         binding.weekZone.setText(agenda.week.toString())
@@ -77,9 +78,22 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
 
         binding.validateButton.setOnClickListener {
             agenda.name = binding.nameZone.text.toString()
-            agenda.week = binding.weekZone.text.toString().toInt()
+            try{
+                val weeknumber = binding.weekZone.text.toString().toInt()
+                if(weeknumber < 1 || weeknumber > 52){
+                    throw NumberFormatException()
+                }else{
+                    agenda.week = weeknumber
+                }
+
+            }catch(except: NumberFormatException){
+                binding.weekZone.setText(agenda.week.toString())
+                Toast.makeText(activity, "Vous devez rentrez un entier entre 1 et 52", Toast.LENGTH_SHORT).show()
+
+            }
+
             agenda.photo = binding.photoZone.text.toString()
-            Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().update(agenda)
+            AppDatabase.getDatabase(requireContext()).agendaDao().update(agenda)
             Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
         }
     }

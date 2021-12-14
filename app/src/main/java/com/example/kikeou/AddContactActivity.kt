@@ -23,8 +23,7 @@ class AddContactActivity : AppCompatActivity() {
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
 
             val contact = Contact(0, key, value)
-            val agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
-                .allowMainThreadQueries().build().agendaDao().getMyAgenda()
+            val agenda : Agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
 
             val contacts : MutableList<Contact> = mutableListOf()
             var newContactAlreadyHere : Boolean = false
@@ -41,7 +40,7 @@ class AddContactActivity : AppCompatActivity() {
             }
 
             agenda.contact = Collections.unmodifiableList(contacts)
-            Room.databaseBuilder(this, AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().update(agenda)
+            AppDatabase.getDatabase(this).agendaDao().update(agenda)
             finish()
         }
     }
