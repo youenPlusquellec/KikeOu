@@ -126,7 +126,7 @@
                     android:textSize="@dimen/titles_text_size" />
 
                 <EditText
-                    android:id="@+id/week2"
+                    android:id="@+id/week_text"
                     android:layout_width="@dimen/profile_week_size"
                     android:layout_height="@dimen/profile_week_height"
                     android:layout_weight="1"
@@ -134,8 +134,7 @@
                     android:ems="10"
                     android:hint="@string/week_hint"
                     android:inputType="number"
-                    android:textSize="@dimen/element_text_size"
-                    tools:ignore="TextContrastCheck" />
+                    android:textSize="@dimen/element_text_size" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/localisations_list"
