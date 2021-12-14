@@ -17,7 +17,7 @@ class QRCodeGenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrcodegen)
 
-        val agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().getMyAgenda()
+        val agenda : Agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
 
         val moshi: Moshi = Moshi.Builder().build()
 
