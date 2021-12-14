@@ -1,16 +1,20 @@
 package com.example.kikeou
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.room.Room
 import com.example.kikeou.coworkers.CoworkerAdapter
 import com.example.kikeou.databinding.FragmentCoworkersBinding
+import com.example.kikeou.room.AppDatabase
 import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
@@ -20,19 +24,38 @@ import com.squareup.moshi.Moshi
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
+ * Use the [CoworkersFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
 
     private var _binding : FragmentCoworkersBinding? = null
     private val binding get() = _binding!!
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if(result.resultCode == Activity.RESULT_OK)
+            {
+                val json = result.data?.getStringExtra("json")
+
+                if (json != null)
+                {
+                    val moshi: Moshi = Moshi.Builder().build()
+                    val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
+
+                    val agenda = jsonAdapter.fromJson(json)
+
+                    if(agenda != null)
+                        Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().insert(agenda)
+                }
+            }
+        }
+
         _binding = FragmentCoworkersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -67,6 +90,10 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
 
         })
         adapter.data = agendas
+
+        binding.qrGenButton.setOnClickListener {
+            startForResult.launch(Intent(requireContext(), CameraActivity::class.java))
+        }
 
     }
 

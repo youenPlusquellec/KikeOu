@@ -14,7 +14,7 @@ data class Agenda(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name="name") val name: String,
     @ColumnInfo(name="week") val week: Int,
-    @ColumnInfo(name="photo") val photo: String,
+    @ColumnInfo(name="photo") val photo: String?,
 
     @TypeConverters(ListContactConverter::class)
     @ColumnInfo(name="contact") val contact : List<Contact>,

@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kevin/StudioProjects/KikeOu/app/src/main/res/layout/activity_camera.xml" value="0.1" />
+        <entry key="..\:/Users/kevin/StudioProjects/KikeOu/app/src/main/res/layout/camera_layout.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/kevin/StudioProjects/KikeOu/app/src/main/res/layout/fragment_camera.xml" value="0.1757852077001013" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_person_background.xml" value="0.26614583333333336" />
         <entry key="..\:/IMR3/Android/TP2/KikeOu/app/src/main/res/drawable/ic_person_foreground.xml" value="0.26614583333333336" />
@@ -32,5 +35,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>
