@@ -2,6 +2,7 @@
     <string name="app_name">KikeOu</string>
     <string name="permissionToGrant">you have to grant camera permission to use this sample</string>
     <string name="profile_title">Mon profil</string>
+    <string name="profile_details_title">Son profil</string>
     <string name="coworkers_title">Mes collègues</string>
     <string name="add_contact_title">Ajouter un contact</string>
     <string name="add_localisation_title">Ajouter une localisation</string>
