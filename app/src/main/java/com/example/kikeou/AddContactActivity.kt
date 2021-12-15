@@ -23,7 +23,7 @@ class AddContactActivity : AppCompatActivity() {
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
 
             val contact = Contact(0, key, value)
-            val agenda : Agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
+            val agenda : Agenda = AppA.agendaDao().getMyAgenda()
 
             val contacts : MutableList<Contact> = mutableListOf()
             var newContactAlreadyHere : Boolean = false

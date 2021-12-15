@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kikeou.R
 import com.example.kikeou.room.models.Localisation
 
-class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>() {
+class LocalisationAdapter2 : RecyclerView.Adapter<LocalisationAdapter2.ViewHolder>() {
 
     var data =  listOf<Localisation>()
         set(value) {
@@ -17,7 +17,7 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalisationAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalisationAdapter2.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.profile_item_view, parent, false)
         return ViewHolder(view)

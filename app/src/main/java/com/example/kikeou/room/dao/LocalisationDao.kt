@@ -3,11 +3,12 @@ package com.example.kikeou.room.dao
 import androidx.room.*
 import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Localisation
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LocalisationDao {
     @Query("SELECT * FROM localisation")
-    fun getAll(): MutableList<Localisation>
+    fun getAll(): Flow<Localisation>
 
     @Insert
     fun insert(localisation: Localisation)

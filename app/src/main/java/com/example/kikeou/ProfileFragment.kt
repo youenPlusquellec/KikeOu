@@ -6,23 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.room.Room
-import com.example.kikeou.coworkers.CoworkerAdapter
-import com.example.kikeou.databinding.FragmentCoworkersBinding
 import com.example.kikeou.databinding.FragmentProfileBinding
 import com.example.kikeou.profile.ContactAdapter
-import com.example.kikeou.profile.LocalisationAdapter
+import com.example.kikeou.profile.LocalisationAdapter2
 import com.example.kikeou.room.AppDatabase
 import com.example.kikeou.room.models.Agenda
-import com.example.kikeou.room.models.Contact
-import com.example.kikeou.room.models.Localisation
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import java.lang.NumberFormatException
 import java.util.*
 
@@ -34,6 +23,10 @@ import java.util.*
 class ProfileFragment:Fragment(R.layout.fragment_profile) {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private val profilViewModel: ProfilViewModel by viewModels {
+        ProfilViewModelFactory((application as AppApplication).agendaRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +50,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
         binding.contactsList.adapter = contactAdapter
         contactAdapter.data = agenda.contact
 
-        val locAdapter = LocalisationAdapter()
+        val locAdapter = LocalisationAdapter2()
         binding.localisationsList.adapter = locAdapter
         locAdapter.data = agenda.loc
 

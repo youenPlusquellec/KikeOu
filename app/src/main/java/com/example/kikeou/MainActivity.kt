@@ -26,29 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         setCurrentFragment(profileFragment)
 
-
-
-        /*var agenda : Agenda = Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
-            .allowMainThreadQueries().build().agendaDao().getMyAgenda()
-        Room.databaseBuilder(this.applicationContext, AppDatabase::class.java, "test")
-            .allowMainThreadQueries().build().agendaDao().delete(agenda)*/
-        val agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
-
-
-        if (agenda == null){
-            Log.d("Mon agenda","Y'a R fraire")
-            val myAgenda : Agenda = Agenda(0, "Unknown", 0, "votrephoto", listOf<Contact>(), listOf<Localisation>(), true)
-            AppDatabase.getDatabase(this).agendaDao().insert(myAgenda)
-        }else{
-            Log.d("Mon agenda", agenda.name)
-            val moshi: Moshi = Moshi.Builder().build()
-            val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
-            val json : String = jsonAdapter.toJson(agenda)
-            Log.d("JSON", json)
-        }
-
-
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
