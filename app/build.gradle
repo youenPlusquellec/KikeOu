@@ -147,6 +147,8 @@ dependencies {
     implementation deps.imageview
 
     implementation deps.picasso
+    
+    implementation deps.gridLayout
 
     testImplementation deps.junit
     androidTestImplementation deps.test.ext_junit

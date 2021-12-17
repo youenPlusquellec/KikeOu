@@ -91,6 +91,8 @@ deps.imageview = "de.hdodenhof:circleimageview:$versions.imageview"
 versions.picasso = "2.71828"
 deps.picasso = "com.squareup.picasso:picasso:$versions.picasso"
 
+versions.gridLayout = "1.0.0"
+deps.gridLayout = "androidx.gridlayout:gridlayout:$versions.gridLayout"
 
 def kapt = [:]
     kapt.room = "androidx.room:room-compiler:$versions.room"

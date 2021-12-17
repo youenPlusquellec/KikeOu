@@ -43,4 +43,5 @@
         <item>Vendredi</item>
     </string-array>
     <string name="add">Ajouter</string>
+    <string name="profile_picture_title">Choisir une photo de profil</string>
 </resources>

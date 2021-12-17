@@ -59,6 +59,11 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
         val agenda = Agenda(1, "moi zebi" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
 
+        binding.profilePicture.setOnClickListener {
+            val intent = Intent(activity, ProfilePictureActivity::class.java)
+            startActivity(intent)
+        }
+
         val contactAdapter = ContactAdapter()
         binding.contactsList.adapter = contactAdapter
         contactAdapter.data = agenda.contact

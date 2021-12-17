@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kikeou.R
 import com.example.kikeou.room.models.Agenda
+import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
 
 class CoworkerAdapter : RecyclerView.Adapter<CoworkerAdapter.ViewHolder>() {
@@ -40,7 +41,11 @@ class CoworkerAdapter : RecyclerView.Adapter<CoworkerAdapter.ViewHolder>() {
         val item = data[position]
         holder.coworkerName.text = item.name
         holder.coworkerContact.text = item.contact[0].value
-        //holder.coworkerPicture.text = item.name
+        Picasso.get()
+            .load(item.photo)
+            .placeholder(R.drawable.ic_person_foreground)
+            .error(R.drawable.ic_person_foreground)
+            .into(holder.coworkerPicture)
     }
 
     override fun getItemCount() = data.size

@@ -68,9 +68,9 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
         val contact1 = Contact(1, "tel", "06.99.32.82.34")
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
         val agenda = Agenda(1, "maman" ,50, "https://meetanentrepreneur.lu/wp-content/uploads/2019/08/profil-linkedin.jpg", listOf(contact1, contact2), listOf(loc1, loc2), false)
-        val agenda2 = Agenda(2, "papa" ,52, "https://meetanentrepreneur.lu/wp-content/uploads/2019/08/profil-linkedin.jpg", listOf(contact1, contact2), listOf(loc1, loc2), false)
-        val agenda3 = Agenda(3, "moi" ,50, "https://meetanentrepreneur.lu/wp-content/uploads/2019/08/profil-linkedin.jpg", listOf(contact1, contact2), listOf(loc1, loc2), false)
-        val agenda4 = Agenda(4, "toi" ,52, "https://meetanentrepreneur.lu/wp-content/uploads/2019/08/profil-linkedin.jpg", listOf(contact1, contact2), listOf(loc1, loc2), false)
+        val agenda2 = Agenda(2, "papa" ,52, "ma photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
+        val agenda3 = Agenda(3, "moi" ,50, "ma photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
+        val agenda4 = Agenda(4, "toi" ,52, "https://kazeistore.files.wordpress.com/2018/09/pile-face3.jpg", listOf(contact1, contact2), listOf(loc1, loc2), false)
 
         val agendas = listOf(agenda, agenda2, agenda3, agenda4)
 
