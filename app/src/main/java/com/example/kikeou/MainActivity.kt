@@ -6,30 +6,41 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.util.Log
 import android.widget.ImageView
+import androidx.lifecycle.ViewModelProvider
 import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.activity_main.view.*
 import net.glxn.qrgen.android.QRCode
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModel: MainActivityViewModel
+
+    private val profileFragment = ProfileFragment()
+    private val coworkersFragment = CoworkersFragment()
+
+    enum class Views {
+        Profile, Coworkers
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val profileFragment = ProfileFragment()
-        val coworkersFragment = CoworkersFragment()
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        setCurrentFragment(profileFragment)
+        updateCurrentView()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener {
+        bottomNavigationView.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.person->setCurrentFragment(profileFragment)
-                R.id.group->setCurrentFragment(coworkersFragment)
+                R.id.person -> viewModel.updateView(Views.Profile)
+                R.id.group -> viewModel.updateView(Views.Coworkers)
             }
+            updateCurrentView()
             true
         }
 
@@ -55,10 +66,6 @@ class MainActivity : AppCompatActivity() {
         /*val myBitmap = QRCode.from(json).bitmap()
         val myImage = findViewById<ImageView>(R.id.image_qr)
         myImage.setImageBitmap(myBitmap)*/
-
-
-
-
     }
 
     fun setCurrentFragment(fragment: Fragment)=
@@ -66,4 +73,11 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.flFragment,fragment)
             commit()
         }
+
+    private fun updateCurrentView() {
+        when(viewModel.currentFragment) {
+            Views.Profile -> setCurrentFragment(profileFragment)
+            Views.Coworkers -> setCurrentFragment(coworkersFragment)
+        }
+    }
 }
