@@ -57,7 +57,7 @@
                     android:id="@+id/profile_picture"
                     android:layout_width="@dimen/main_profile_picture_size"
                     android:layout_height="@dimen/main_profile_picture_size"
-                    android:src="@drawable/ic_person_foreground"
+                    android:src="@drawable/ic_edit_foreground"
                     app:civ_border_width="2dp"
                     app:civ_border_color="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
