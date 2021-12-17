@@ -2,42 +2,65 @@
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.kikeou.profile.ContactAdapter
 import com.example.kikeou.profile.LocalisationAdapter
+import com.example.kikeou.room.AppDatabase
+import com.example.kikeou.room.models.Agenda
 import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 
     class ProfileDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_details)
-        val agenda = getIntent().getSerializableExtra("agenda");
-        Toast.makeText(this, "You clicked on ${agenda}", Toast.LENGTH_SHORT).show()
 
+        val agendaJson = intent.getSerializableExtra("agenda");
 
-        val loc1 = Localisation(1,1, "dans ton cul")
-        val loc2 = Localisation(2,3, "dans le cul de youen")
-        val contact1 = Contact(1, "tel", "06.99.32.82.34")
-        val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
-        val contactList = listOf(contact1, contact2)
-        val locList = listOf(loc1, loc2)
+        if (agendaJson != null)
+        {
+            val moshi: Moshi = Moshi.Builder().build()
+            val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
 
-        
-        findViewById<TextView>(R.id.name_zone).setText("Moi")
+            val agenda = jsonAdapter.fromJson(agendaJson.toString())
 
-        val contactAdapter = ContactAdapter()
-        findViewById<RecyclerView>(R.id.contacts_list).adapter = contactAdapter
-        //contactAdapter.data = agenda.contacts
-        contactAdapter.data = contactList
+            val imageView = findViewById<CircleImageView>(R.id.coworker_picture)
+            if (agenda != null) {
+                Picasso.get()
+                    .load(agenda.photo)
+                    .placeholder(R.drawable.ic_person_foreground)
+                    .error(R.drawable.ic_person_foreground)
+                    .into(imageView)
+            }
 
-        findViewById<TextView>(R.id.week).setText("52")
+            if (agenda != null) {
+                findViewById<TextView>(R.id.name_zone).text = agenda.name
+            }
 
-        val locAdapter = LocalisationAdapter()
-        findViewById<RecyclerView>(R.id.localisations_list).adapter = locAdapter
-        //locAdapter.data = agenda.loc
-        locAdapter.data = locList
+            val contactAdapter = ContactAdapter()
+            findViewById<RecyclerView>(R.id.contacts_list).adapter = contactAdapter
+            if (agenda != null) {
+                contactAdapter.data = agenda.contact
+            }
+
+            if (agenda != null) {
+                findViewById<TextView>(R.id.week).text = "Semaine ${agenda.week}"
+            }
+
+            val locAdapter = LocalisationAdapter()
+            findViewById<RecyclerView>(R.id.localisations_list).adapter = locAdapter
+            if (agenda != null) {
+                locAdapter.data = agenda.loc
+            }
+        }
+
     }
 }

@@ -88,6 +88,9 @@ deps.cardview = "androidx.cardview:cardview:$versions.cardview"
 deps.recycleview = "androidx.recyclerview:recyclerview:$versions.recycleview"
 deps.imageview = "de.hdodenhof:circleimageview:$versions.imageview"
 
+versions.picasso = "2.71828"
+deps.picasso = "com.squareup.picasso:picasso:$versions.picasso"
+
 
 def kapt = [:]
     kapt.room = "androidx.room:room-compiler:$versions.room"
