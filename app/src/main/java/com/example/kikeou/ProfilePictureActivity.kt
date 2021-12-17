@@ -26,7 +26,7 @@ class ProfilePictureActivity : AppCompatActivity() {
         "https://i2.wp.com/sguru.org/wp-content/uploads/2017/06/cool-anonymous-profile-pictures-15.jpg?resize=460%2C458&ssl=1",
         "https://www.postplanner.com/hs-fs/hub/513577/file-2886416984-png/blog-files/facebook-profile-pic-vs-cover-photo-sq.png?width=250&height=250&name=facebook-profile-pic-vs-cover-photo-sq.png",
         "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/24/19/gay-pride.jpg?width=982&height=726&auto=webp&quality=75",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2eN8ZS-WW7HqmiOGKHDdLV8qUEKOU5b3bZg&usqp=CAU",
+        "https://lh3.googleusercontent.com/proxy/9io-JZk38MscM2OrFWUGTdvv1Lt-R-piY41U497dDBHFR0cDb3q_BF32p3eC3RAIdP-AJqkSTU4sLTcCtVMZRqL3jsnwiK_20m8",
         "https://i.pinimg.com/originals/31/6c/37/316c3748190aa5a24e1295d8a1cc2ca2.jpg",
         "https://p16-va-default.akamaized.net/img/musically-maliva-obj/1655574325839877~c5_1080x1080.jpeg"
     )

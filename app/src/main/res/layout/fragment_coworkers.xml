@@ -42,8 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/coworkers_title"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_titles_text_size" />
+                android:textSize="@dimen/main_titles_text_size"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/coworkers_list"
