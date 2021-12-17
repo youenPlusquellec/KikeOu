@@ -17,7 +17,7 @@ class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
     }
 }
 
-class WordViewModelFactory(private val repository: AgendaRepository) : ViewModelProvider.Factory {
+class ProfilViewModelFactory(private val repository: AgendaRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProfilViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

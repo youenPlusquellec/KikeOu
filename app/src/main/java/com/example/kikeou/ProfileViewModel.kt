@@ -23,7 +23,7 @@ class ProfileViewModel : ViewModel() {
     }
 }
 
-class ProfilViewModelFactory(private val repository: AgendaRepository) : ViewModelProvider.Factory {
+class ProfileViewModelFactory(private val repository: AgendaRepository) : ViewModelProvider.Factory {
     override fun <T: ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProfilViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
