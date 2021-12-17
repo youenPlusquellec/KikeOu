@@ -27,7 +27,7 @@ class ProfilePictureActivity : AppCompatActivity() {
         "https://www.postplanner.com/hs-fs/hub/513577/file-2886416984-png/blog-files/facebook-profile-pic-vs-cover-photo-sq.png?width=250&height=250&name=facebook-profile-pic-vs-cover-photo-sq.png",
         "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/24/19/gay-pride.jpg?width=982&height=726&auto=webp&quality=75",
         "https://lh3.googleusercontent.com/proxy/9io-JZk38MscM2OrFWUGTdvv1Lt-R-piY41U497dDBHFR0cDb3q_BF32p3eC3RAIdP-AJqkSTU4sLTcCtVMZRqL3jsnwiK_20m8",
-        "https://i.pinimg.com/originals/31/6c/37/316c3748190aa5a24e1295d8a1cc2ca2.jpg",
+        "https://cdn.radiofrance.fr/s3/cruiser-production/2019/03/b80afc41-0af5-4496-8a68-3b753b1d0474/1136_gettyimages-151324506.jpg",
         "https://p16-va-default.akamaized.net/img/musically-maliva-obj/1655574325839877~c5_1080x1080.jpeg"
     )
 

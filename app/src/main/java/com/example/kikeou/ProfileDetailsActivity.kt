@@ -39,25 +39,17 @@ import de.hdodenhof.circleimageview.CircleImageView
                     .placeholder(R.drawable.ic_person_foreground)
                     .error(R.drawable.ic_person_foreground)
                     .into(imageView)
-            }
 
-            if (agenda != null) {
                 findViewById<TextView>(R.id.name_zone).text = agenda.name
-            }
 
-            val contactAdapter = ContactAdapter()
-            findViewById<RecyclerView>(R.id.contacts_list).adapter = contactAdapter
-            if (agenda != null) {
+                val contactAdapter = ContactAdapter()
+                findViewById<RecyclerView>(R.id.contacts_list).adapter = contactAdapter
                 contactAdapter.data = agenda.contact
-            }
 
-            if (agenda != null) {
                 findViewById<TextView>(R.id.week).text = "Semaine ${agenda.week}"
-            }
 
-            val locAdapter = LocalisationAdapter()
-            findViewById<RecyclerView>(R.id.localisations_list).adapter = locAdapter
-            if (agenda != null) {
+                val locAdapter = LocalisationAdapter()
+                findViewById<RecyclerView>(R.id.localisations_list).adapter = locAdapter
                 locAdapter.data = agenda.loc
             }
         }

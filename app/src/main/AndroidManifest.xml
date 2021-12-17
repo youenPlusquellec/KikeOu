@@ -16,19 +16,19 @@
         android:theme="@style/Theme.KikeOu">
         <activity
             android:name=".ProfilePictureActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ProfileDetailsActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".AddLocalisationActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".AddContactActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
