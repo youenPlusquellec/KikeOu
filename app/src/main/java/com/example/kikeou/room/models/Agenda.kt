@@ -17,10 +17,10 @@ data class Agenda(
     @ColumnInfo(name="photo") var photo: String,
 
     @TypeConverters(ListContactConverter::class)
-    @ColumnInfo(name="contact") var contact : List<Contact>,
+    @ColumnInfo(name="contact") var contact : MutableList<Contact>,
 
     @TypeConverters(ListLocalisationConverter::class)
-    @ColumnInfo(name="loc") var loc : List<Localisation>,
+    @ColumnInfo(name="loc") var loc : MutableList<Localisation>,
 
     @Transient
     @ColumnInfo(name="is_mine") var is_mine : Boolean = false,

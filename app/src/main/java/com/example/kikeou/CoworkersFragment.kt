@@ -15,11 +15,6 @@ import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
 
     private var _binding : FragmentCoworkersBinding? = null
@@ -29,7 +24,7 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCoworkersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,10 +36,10 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
         val loc2 = Localisation(2,3, "dans le cul de youen")
         val contact1 = Contact(1, "tel", "06.99.32.82.34")
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
-        val agenda = Agenda(1, "maman" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
-        val agenda2 = Agenda(2, "papa" ,52, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
-        val agenda3 = Agenda(3, "moi" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
-        val agenda4 = Agenda(4, "toi" ,52, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
+        val agenda = Agenda(1, "maman" ,50, "une_photo", mutableListOf(contact1, contact2), mutableListOf(loc1, loc2), false)
+        val agenda2 = Agenda(2, "papa" ,52, "une_photo", mutableListOf(contact1, contact2), mutableListOf(loc1, loc2), false)
+        val agenda3 = Agenda(3, "moi" ,50, "une_photo", mutableListOf(contact1, contact2), mutableListOf(loc1, loc2), false)
+        val agenda4 = Agenda(4, "toi" ,52, "une_photo", mutableListOf(contact1, contact2), mutableListOf(loc1, loc2), false)
 
         val agendas = listOf(agenda, agenda2, agenda3, agenda4)
 

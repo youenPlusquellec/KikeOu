@@ -33,19 +33,19 @@ abstract class AppDatabase: RoomDatabase(){
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var agendaDao = database.agendaDao()
-                    val agenda = agendaDao.getMyAgenda()
+                    val agendaDao = database.agendaDao()
 
+                    val agenda: Agenda? = agendaDao.getMyAgenda().asLiveData().value
 
-                    if (agenda == null){
+                    if (agenda == null) {
                         Log.d("Mon agenda","Y'a R fraire")
-                        val myAgenda : Agenda = Agenda(0, "Unknown", 0, "votrephoto", listOf<Contact>(), listOf<Localisation>(), true)
+                        val myAgenda = Agenda(0, "Unknown", 1, "Votre photo", mutableListOf<Contact>(), mutableListOf<Localisation>(), true)
                         agendaDao.insert(myAgenda)
                     }else{
-                        Log.d("Mon agenda", (agenda.asLiveData().value?.name ?: "[No data]"))
+                        Log.d("Mon agenda", agenda.name)
                         val moshi: Moshi = Moshi.Builder().build()
                         val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
-                        val json : String = jsonAdapter.toJson(agenda.asLiveData().value)
+                        val json : String = jsonAdapter.toJson(agenda)
                         Log.d("JSON", json)
                     }
                 }

@@ -21,12 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val profileFragment=ProfileFragment();
-        val coworkersFragment=CoworkersFragment();
+        val profileFragment = ProfileFragment()
+        val coworkersFragment = CoworkersFragment()
 
         setCurrentFragment(profileFragment)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView);
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){

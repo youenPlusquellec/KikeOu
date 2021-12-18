@@ -2,15 +2,11 @@ package com.example.kikeou
 
 import androidx.lifecycle.*
 import com.example.kikeou.room.models.Agenda
-import com.example.kikeou.room.models.Contact
-import com.example.kikeou.room.models.Localisation
 import com.example.kikeou.room.repository.AgendaRepository
 import kotlinx.coroutines.launch
 
 class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
     val agenda: LiveData<Agenda> = repository.myAgenda.asLiveData()
-    /*val contacts : LiveData<List<Contact>> = repository.myContact.asLiveData()
-    val locs : LiveData<List<Localisation>> = repository.myLoc.asLiveData()*/
 
     fun insert(agenda: Agenda) = viewModelScope.launch {
         repository.insert(agenda)
@@ -18,6 +14,18 @@ class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
 
     fun update(agenda: Agenda) = viewModelScope.launch {
         repository.update(agenda)
+    }
+
+    fun updateLocList() = viewModelScope.launch {
+        val agenda = agenda.value
+
+        if (agenda != null) update(agenda)
+    }
+
+    fun updateContactList() = viewModelScope.launch {
+        val agenda = agenda.value
+
+        if(agenda != null) update(agenda)
     }
 }
 
