@@ -3,6 +3,7 @@
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,12 @@ import de.hdodenhof.circleimageview.CircleImageView
                 val locAdapter = LocalisationAdapter()
                 findViewById<RecyclerView>(R.id.localisations_list).adapter = locAdapter
                 locAdapter.data = agenda.loc
+
+                findViewById<Button>(R.id.delete_button).setOnClickListener {
+                    // TODO Delete profile in database
+                    Log.w("coucou", "coucou")
+                    finish()
+                }
             }
         }
 
