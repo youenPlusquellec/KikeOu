@@ -17,7 +17,7 @@ class QRCodeGenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrcodegen)
 
-        val agenda : Agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda()
+        /*val agenda : Agenda = AppDatabase.getDatabase(this).agendaDao().getMyAgenda().valu
 
         val moshi: Moshi = Moshi.Builder().build()
 
@@ -29,7 +29,7 @@ class QRCodeGenActivity : AppCompatActivity() {
 
         val myBitmap = QRCode.from(json).bitmap()
         val myImage = findViewById<ImageView>(R.id.qrcodegen_image)
-        myImage.setImageBitmap(myBitmap)
+        myImage.setImageBitmap(myBitmap)*/
 
 
     }

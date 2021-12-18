@@ -16,7 +16,9 @@ import java.lang.NumberFormatException
 import java.util.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -85,25 +87,37 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
 
             val myAgenda: Agenda? = profilViewModel.agenda.value
 
+            val name = binding.nameZone.text.toString()
+            val photo = binding.photoZone.text.toString()
+            val weeknumber = binding.weekZone.text.toString().toInt()
+
             if(myAgenda != null)
             {
                 try{
-                    val weeknumber = binding.weekZone.text.toString().toInt()
                     if(weeknumber < 1 || weeknumber > 52){
                         throw NumberFormatException()
                     }else{
-                        myAgenda.name = binding.nameZone.text.toString()
-                        myAgenda.photo = binding.photoZone.text.toString()
+                        myAgenda.name = name
+                        myAgenda.photo = photo
                         myAgenda.week = weeknumber
+
+                        profilViewModel.update(myAgenda)
                     }
 
                 }catch(except: NumberFormatException){
                     binding.weekZone.setText(myAgenda.week.toString())
                     Toast.makeText(activity, "Vous devez rentrez un entier entre 1 et 52", Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                val agenda = Agenda(id = 0, name = name,
+                photo = photo, week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
+
+                profilViewModel.insert(agenda)
+            }
         }
     }
 

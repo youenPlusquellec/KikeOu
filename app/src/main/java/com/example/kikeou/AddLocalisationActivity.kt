@@ -17,7 +17,7 @@ class AddLocalisationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_localisation)
 
-        findViewById<Button>(R.id.Add_button).setOnClickListener {
+        /*findViewById<Button>(R.id.Add_button).setOnClickListener {
             val key : String = findViewById<Spinner>(R.id.contact_key).getSelectedItem().toString()
             var day: Int = 0
             if(key == "Lundi") day = 1
@@ -49,6 +49,6 @@ class AddLocalisationActivity : AppCompatActivity() {
             finish()
 
             finish()
-        }
+        }*/
     }
 }

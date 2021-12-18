@@ -18,12 +18,12 @@ class AddContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_contact)
 
-        findViewById<Button>(R.id.Add_button).setOnClickListener {
+        /*findViewById<Button>(R.id.Add_button).setOnClickListener {
             val key : String = findViewById<Spinner>(R.id.contact_key).getSelectedItem().toString()
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
 
             val contact = Contact(0, key, value)
-            val agenda : Agenda = AppA.agendaDao().getMyAgenda()
+            val agenda : Agenda = (application as AppApplication).database.agendaDao().getMyAgenda().
 
             val contacts : MutableList<Contact> = mutableListOf()
             var newContactAlreadyHere : Boolean = false
@@ -42,6 +42,6 @@ class AddContactActivity : AppCompatActivity() {
             agenda.contact = Collections.unmodifiableList(contacts)
             AppDatabase.getDatabase(this).agendaDao().update(agenda)
             finish()
-        }
+        }*/
     }
 }

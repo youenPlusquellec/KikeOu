@@ -12,8 +12,8 @@ class AgendaRepository(private val agendaDao: AgendaDao) {
 
     val agenda : Flow<List<Agenda>> = agendaDao.getAll()
 
-    val myLoc : Flow<List<Localisation>> = agendaDao.getMyLoc()
-    val myContact : Flow<List<Contact>> = agendaDao.getMyContact()
+//    val myLoc : Flow<List<Localisation>> = agendaDao.getMyLoc()
+//    val myContact : Flow<List<Contact>> = agendaDao.getMyContact()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

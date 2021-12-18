@@ -42,7 +42,7 @@ abstract class AppDatabase: RoomDatabase(){
                         val myAgenda : Agenda = Agenda(0, "Unknown", 0, "votrephoto", listOf<Contact>(), listOf<Localisation>(), true)
                         agendaDao.insert(myAgenda)
                     }else{
-                        Log.d("Mon agenda", agenda.asLiveData().value.name)
+                        Log.d("Mon agenda", (agenda.asLiveData().value?.name ?: "[No data]"))
                         val moshi: Moshi = Moshi.Builder().build()
                         val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
                         val json : String = jsonAdapter.toJson(agenda.asLiveData().value)

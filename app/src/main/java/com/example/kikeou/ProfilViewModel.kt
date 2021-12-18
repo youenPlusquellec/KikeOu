@@ -9,11 +9,15 @@ import kotlinx.coroutines.launch
 
 class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
     val agenda: LiveData<Agenda> = repository.myAgenda.asLiveData()
-    val contacts : LiveData<List<Contact>> = repository.myContact.asLiveData()
-    val locs : LiveData<List<Localisation>> = repository.myLoc.asLiveData()
+    /*val contacts : LiveData<List<Contact>> = repository.myContact.asLiveData()
+    val locs : LiveData<List<Localisation>> = repository.myLoc.asLiveData()*/
 
     fun insert(agenda: Agenda) = viewModelScope.launch {
         repository.insert(agenda)
+    }
+
+    fun update(agenda: Agenda) = viewModelScope.launch {
+        repository.update(agenda)
     }
 }
 
