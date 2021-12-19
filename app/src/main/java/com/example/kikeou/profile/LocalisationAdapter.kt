@@ -1,5 +1,6 @@
 package com.example.kikeou.profile
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
@@ -7,25 +8,27 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kikeou.ProfilViewModel
 import com.example.kikeou.R
-import com.example.kikeou.coworkers.CoworkerAdapter
-import com.example.kikeou.room.models.Contact
 import com.example.kikeou.room.models.Localisation
 
 class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>() {
 
-    var data =  listOf<Localisation>()
+    var data =  mutableListOf<Localisation>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalisationAdapter.ViewHolder {
+    var viewModel: ProfilViewModel? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.profile_item_view, parent, false)
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
 
@@ -33,6 +36,7 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
         val day = convertNumericDayToString(item.day, res)
 
         holder.info.text = "${day} - ${item.value}"
+        holder.delete.setOnClickListener { deleteItem(position) }
     }
 
     override fun getItemCount() = data.size
@@ -50,6 +54,13 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val info: TextView = itemView.findViewById(R.id.info)
+        val delete: ImageView = itemView.findViewById(R.id.icon_delete)
     }
 
+    fun deleteItem(position: Int) {
+        data.removeAt(position)
+        viewModel?.updateLocList()
+
+        notifyDataSetChanged()
+    }
 }

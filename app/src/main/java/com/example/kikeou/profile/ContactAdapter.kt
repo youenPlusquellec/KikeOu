@@ -6,17 +6,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kikeou.ProfilViewModel
 import com.example.kikeou.R
-import com.example.kikeou.coworkers.CoworkerAdapter
 import com.example.kikeou.room.models.Contact
 
 class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
-    var data =  listOf<Contact>()
+    var data =  mutableListOf<Contact>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    var viewModel: ProfilViewModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -26,13 +28,21 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.info.text = item.value
+        holder.info.text = "${item.key} - ${item.value}"
+        holder.delete.setOnClickListener { deleteItem(position) }
     }
 
     override fun getItemCount() = data.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val info: TextView = itemView.findViewById(R.id.info)
+        val delete : ImageView = itemView.findViewById(R.id.icon_delete)
     }
 
+    fun deleteItem(position: Int) {
+        data.removeAt(position)
+        viewModel?.updateContactList()
+
+        notifyDataSetChanged()
+    }
 }

@@ -11,77 +11,121 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.kikeou.coworkers.CoworkerAdapter
-import com.example.kikeou.databinding.FragmentCoworkersBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.kikeou.databinding.FragmentProfileBinding
 import com.example.kikeou.profile.ContactAdapter
 import com.example.kikeou.profile.LocalisationAdapter
 import com.example.kikeou.room.models.Agenda
-import com.example.kikeou.room.models.Contact
-import com.example.kikeou.room.models.Localisation
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment:Fragment(R.layout.fragment_profile) {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var app: AppApplication
+
+    private val profilViewModel: ProfilViewModel by viewModels {
+        ProfilViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        app = (requireActivity().application as AppApplication)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loc1 = Localisation(1,1, "dans ton cul")
-        val loc2 = Localisation(2,3, "dans le cul de youen")
-        val contact1 = Contact(1, "tel", "06.99.32.82.34")
-        val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
-        val agenda = Agenda(1, "moi zebi" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
+        profilViewModel.agenda.observe(this, { agenda ->
+            if(agenda != null)
+            {
+                binding.nameZone.setText(agenda.name)
+                binding.weekZone.setText(agenda.week.toString())
+                binding.photoZone.setText(agenda.photo)
+
+                val contactAdapter = ContactAdapter()
+                binding.contactsList.adapter = contactAdapter
+                contactAdapter.data = agenda.contact
+                contactAdapter.viewModel = profilViewModel
+
+                val locAdapter = LocalisationAdapter()
+                binding.localisationsList.adapter = locAdapter
+                locAdapter.data = agenda.loc
+                locAdapter.viewModel = profilViewModel
+            }
+        })
 
         binding.profilePicture.setOnClickListener {
             val intent = Intent(activity, ProfilePictureActivity::class.java)
             startActivity(intent)
         }
 
-        val contactAdapter = ContactAdapter()
-        binding.contactsList.adapter = contactAdapter
-        contactAdapter.data = agenda.contact
-
-        val locAdapter = LocalisationAdapter()
-        binding.localisationsList.adapter = locAdapter
-        locAdapter.data = agenda.loc
-
         binding.addContactButton.setOnClickListener {
             val intent = Intent(activity, AddContactActivity::class.java)
             startActivity(intent)
         }
 
-        binding.weekText.inputFilterNumberRange(0..52)
+        binding.weekZone.inputFilterNumberRange(0..52)
 
         binding.addLocButton.setOnClickListener {
             val intent = Intent(activity, AddLocalisationActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.qrGenButton.setOnClickListener{
+            val intent = Intent(activity, QRCodeGenActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.validateButton.setOnClickListener {
+            val myAgenda: Agenda? = profilViewModel.agenda.value
+
+            val name = binding.nameZone.text.toString()
+            val photo = binding.photoZone.text.toString()
+            val weeknumber = binding.weekZone.text.toString().toInt()
+
+            if(myAgenda != null)
+            {
+                try{
+                    if(weeknumber < 1 || weeknumber > 52){
+                        throw NumberFormatException()
+                    }else{
+                        myAgenda.name = name
+                        myAgenda.photo = photo
+                        myAgenda.week = weeknumber
+
+                        profilViewModel.update(myAgenda)
+                    }
+
+                }catch(except: NumberFormatException){
+                    binding.weekZone.setText(myAgenda.week.toString())
+                    Toast.makeText(activity, "Vous devez rentrez un entier entre 1 et 52", Toast.LENGTH_SHORT).show()
+                }
+
+                Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                val agenda = Agenda(id = 0, name = name,
+                photo = photo, week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
+
+                profilViewModel.insert(agenda)
+            }
         }
     }
 

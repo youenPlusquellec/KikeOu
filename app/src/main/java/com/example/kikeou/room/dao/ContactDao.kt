@@ -1,19 +1,20 @@
 package com.example.kikeou.room.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.kikeou.room.models.Contact
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDao {
     @Query("SELECT * FROM contact")
-    fun getAll(): List<Contact>
+    fun getAll(): Flow<Contact>
 
     @Insert
     fun insert(contact: Contact)
 
     @Delete
     fun delete(contact: Contact)
+
+    @Update
+    fun update(contact: Contact)
 }
