@@ -45,8 +45,8 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
 
                     val agenda = jsonAdapter.fromJson(json)
 
-                    if(agenda != null)
-                        Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().insert(agenda)
+                    /*if(agenda != null)
+                        Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().insert(agenda)*/
                 }
             }
         }
@@ -79,7 +79,7 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
                 val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
                 val json : String = jsonAdapter.toJson(adapter.data[position])
 
-                intent.putExtra("agenda", json);
+                intent.putExtra("agenda", json)
                 startActivity(intent)
             }
 

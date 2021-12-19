@@ -11,13 +11,11 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -60,10 +58,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
                 binding.weekZone.setText(agenda.week.toString())
                 binding.photoZone.setText(agenda.photo)
 
-                binding.profilePicture.setOnClickListener {
-            val intent = Intent(activity, ProfilePictureActivity::class.java)
-            startActivity(intent)
-        }val contactAdapter = ContactAdapter()
+                val contactAdapter = ContactAdapter()
                 binding.contactsList.adapter = contactAdapter
                 contactAdapter.data = agenda.contact
                 contactAdapter.viewModel = profilViewModel
@@ -75,12 +70,17 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             }
         })
 
+        binding.profilePicture.setOnClickListener {
+            val intent = Intent(activity, ProfilePictureActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.addContactButton.setOnClickListener {
             val intent = Intent(activity, AddContactActivity::class.java)
             startActivity(intent)
         }
 
-        binding.weekText.inputFilterNumberRange(0..52)
+        binding.weekZone.inputFilterNumberRange(0..52)
 
         binding.addLocButton.setOnClickListener {
             val intent = Intent(activity, AddLocalisationActivity::class.java)
