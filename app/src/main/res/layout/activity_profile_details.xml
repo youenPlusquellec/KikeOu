@@ -46,7 +46,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:src="@drawable/ic_person_foreground"
-                    app:civ_border_color="#FF000000"
+                    app:civ_border_color="@color/iconCircle"
                     app:civ_border_width="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/left_bar"
@@ -70,7 +70,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 tools:src="https://thispersondoesnotexist.com" />
 
@@ -91,6 +91,7 @@
                     android:id="@+id/name_zone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:text="@string/name_hint"
                     android:textSize="20sp" />
