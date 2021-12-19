@@ -11,5 +11,5 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#6200EE</color>
     <color name="colorAccent">#6200EE</color>
-    <color name="iconCircle">#000000</color>
+    <color name="iconCircle">#FFFFFF</color>
 </resources>
