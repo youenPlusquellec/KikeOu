@@ -1,12 +1,24 @@
 package com.example.kikeou
 
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.Spanned
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import com.example.kikeou.coworkers.CoworkerAdapter
 import com.example.kikeou.databinding.FragmentCoworkersBinding
@@ -47,6 +59,11 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
         val contact2 = Contact(2, "email", "wilfried.pepin@outlook")
         val agenda = Agenda(1, "moi zebi" ,50, "une_photo", listOf(contact1, contact2), listOf(loc1, loc2), false)
 
+        binding.profilePicture.setOnClickListener {
+            val intent = Intent(activity, ProfilePictureActivity::class.java)
+            startActivity(intent)
+        }
+
         val contactAdapter = ContactAdapter()
         binding.contactsList.adapter = contactAdapter
         contactAdapter.data = agenda.contact
@@ -60,10 +77,82 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             startActivity(intent)
         }
 
+        binding.weekText.inputFilterNumberRange(0..52)
+
         binding.addLocButton.setOnClickListener {
             val intent = Intent(activity, AddLocalisationActivity::class.java)
             startActivity(intent)
         }
     }
 
+}
+
+fun EditText.inputFilterNumberRange(range: IntRange){
+    filterMin(range.first)
+    filters = arrayOf<InputFilter>(InputFilterMax(range.last))
+}
+
+class InputFilterMax(private var max: Int) : InputFilter {
+    override fun filter(
+        p0: CharSequence,p1: Int,p2: Int,p3: Spanned?,p4: Int,p5: Int
+    ): CharSequence? {
+        try {
+            val replacement = p0.subSequence(p1, p2).toString()
+            val newVal = p3.toString().substring(0, p4) + replacement + p3.toString()
+                .substring(p5, p3.toString().length)
+            val input = newVal.toInt()
+            if (input <= max) return null
+        } catch (e: NumberFormatException) { }
+        return ""
+    }
+}
+
+
+fun EditText.filterMin(min: Int){
+    onFocusChangeListener = View.OnFocusChangeListener { view, b ->
+        if (!b) {
+            setTextMin(min)
+            context.hideSoftKeyboard(this)
+        }
+    }
+
+    setOnEditorActionListener { v, actionId, event ->
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            setTextMin(min)
+            context.hideSoftKeyboard(this)
+        }
+        false
+    }
+}
+
+
+// extension function to set edit text minimum number
+fun EditText.setTextMin(min: Int){
+    try {
+        val value = text.toString().toInt()
+        setUnderlineColor(Color.GREEN)
+        if (value < min){
+            setText("$min")
+            setUnderlineColor(Color.RED)
+        }
+    } catch (e: Exception){
+        setUnderlineColor(Color.RED)
+        setText("$min")
+    }
+}
+
+fun Context.hideSoftKeyboard(editText: EditText){
+    (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+        hideSoftInputFromWindow(editText.windowToken, 0)
+    }
+}
+
+fun EditText.setUnderlineColor(color: Int){
+    background.mutate().apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+        }else{
+            setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        }
+    }
 }

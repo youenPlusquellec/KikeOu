@@ -25,6 +25,7 @@
     <string name="day5">Vendredi</string>
     <string name="qr_gen_desc">Generate QR Code</string>
     <string name="qr_read_desc">Read Qr Code</string>
+    <string name="delete_button">Supprimer</string>
     <string-array name="contact_key_array">
         <item>telephone</item>
         <item>email</item>
@@ -43,4 +44,5 @@
         <item>Vendredi</item>
     </string-array>
     <string name="add">Ajouter</string>
+    <string name="profile_picture_title">Choisir une photo de profil</string>
 </resources>

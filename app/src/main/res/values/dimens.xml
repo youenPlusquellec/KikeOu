@@ -6,4 +6,6 @@
     <dimen name="icon_size">64dp</dimen>
     <dimen name="profile_week_height">48dp</dimen>
     <dimen name="profile_week_size">72dp</dimen>
+    <dimen name="main_profile_picture_size">48dp</dimen>
+
 </resources>
