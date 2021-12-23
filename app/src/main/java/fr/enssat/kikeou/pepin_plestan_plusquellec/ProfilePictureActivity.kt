@@ -1,20 +1,17 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec
 
-import android.app.Activity
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.AppDatabase
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_profile_picture.*
 
 class ProfilePictureActivity : AppCompatActivity() {
+    private val profilViewModel: ProfilViewModel by viewModels {
+        ProfilViewModelFactory((application as AppApplication).agendaRepository)
+    }
 
     val profile_pictures = arrayOf<String>(
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJTgOgt3wKhEdCEXL4EKkypl4l-iNhkSaew&usqp=CAU",
@@ -44,14 +41,16 @@ class ProfilePictureActivity : AppCompatActivity() {
                     .placeholder(R.drawable.ic_person_foreground)
                     .error(R.drawable.ic_person_foreground)
                     .into(item)
+
+                item.setTag(i)
+
                 item.setOnClickListener {
 
-                    // TODO Ajouter la nouvelle pp à la db
-                    //var agenda : Agenda = AppDatabase.getDatabase(requireContext()).agendaDao().getMyAgenda()
-                    //agenda.photo = profile_pictures[i]
-                    //AppDatabase.getDatabase(requireContext()).agendaDao().update(agenda)
-
-                    finish()
+                    profilViewModel.agenda.observe(this, { agenda ->
+                        agenda.photo = profile_pictures[it.tag as Int]
+                        profilViewModel.update(agenda)
+                        finish()
+                    })
                 }
             }
         }

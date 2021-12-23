@@ -20,6 +20,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.squareup.picasso.Picasso
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.FragmentProfileBinding
 import fr.enssat.kikeou.pepin_plestan_plusquellec.profile.ContactAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.profile.LocalisationAdapter
@@ -56,7 +57,12 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             {
                 binding.nameZone.setText(agenda.name)
                 binding.weekZone.setText(agenda.week.toString())
-                binding.photoZone.setText(agenda.photo)
+
+                Picasso.get()
+                    .load(agenda.photo)
+                    .placeholder(R.drawable.ic_edit_foreground)
+                    .error(R.drawable.ic_person_foreground)
+                    .into(binding.profilePicture)
 
                 val contactAdapter = ContactAdapter()
                 binding.contactsList.adapter = contactAdapter
