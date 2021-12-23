@@ -1,19 +1,12 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.activity.viewModels
-import androidx.room.Room
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.AppDatabase
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
+import androidx.appcompat.app.AppCompatActivity
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
-import java.util.*
 
 class AddContactActivity : AppCompatActivity() {
     private val profilViewModel: ProfilViewModel by viewModels {
