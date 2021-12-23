@@ -96,7 +96,6 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             val myAgenda: Agenda? = profilViewModel.agenda.value
 
             val name = binding.nameZone.text.toString()
-            val photo = binding.photoZone.text.toString()
             val weeknumber = binding.weekZone.text.toString().toInt()
 
             if(myAgenda != null)
@@ -106,7 +105,6 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
                         throw NumberFormatException()
                     }else{
                         myAgenda.name = name
-                        myAgenda.photo = photo
                         myAgenda.week = weeknumber
 
                         profilViewModel.update(myAgenda)
@@ -122,7 +120,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             else
             {
                 val agenda = Agenda(id = 0, name = name,
-                photo = photo, week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
+                photo = "ma photo", week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
 
                 profilViewModel.insert(agenda)
             }
