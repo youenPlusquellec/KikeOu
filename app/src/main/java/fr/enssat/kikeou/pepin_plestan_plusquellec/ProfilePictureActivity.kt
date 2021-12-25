@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_profile_picture.*
 
 class ProfilePictureActivity : AppCompatActivity() {
     private val profilViewModel: ProfilViewModel by viewModels {
@@ -45,7 +44,6 @@ class ProfilePictureActivity : AppCompatActivity() {
                 item.setTag(i)
 
                 item.setOnClickListener {
-
                     profilViewModel.agenda.observe(this, { agenda ->
                         agenda.photo = profile_pictures[it.tag as Int]
                         profilViewModel.update(agenda)
