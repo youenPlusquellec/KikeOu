@@ -1,5 +1,6 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
@@ -102,33 +103,57 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             val myAgenda: Agenda? = profilViewModel.agenda.value
 
             val name = binding.nameZone.text.toString()
-            val weeknumber = binding.weekZone.text.toString().toInt()
 
-            if(myAgenda != null)
-            {
-                try{
-                    if(weeknumber < 1 || weeknumber > 52){
-                        throw NumberFormatException()
-                    }else{
-                        myAgenda.name = name
-                        myAgenda.week = weeknumber
+            try {
+                val weeknumber = binding.weekZone.text.toString().toInt()
 
-                        profilViewModel.update(myAgenda)
+                if(myAgenda != null)
+                {
+                    try {
+                        if(weeknumber < 1 || weeknumber > 52) {
+                            throw NumberFormatException()
+                        } else {
+                            myAgenda.name = name
+                            myAgenda.week = weeknumber
+
+                            profilViewModel.update(myAgenda)
+                        }
+
+                    } catch(except: NumberFormatException) {
+                        binding.weekZone.setText(myAgenda.week.toString())
+                        Toast.makeText(activity, "Vous devez rentrez un entier entre 1 et 52", Toast.LENGTH_SHORT).show()
                     }
 
-                }catch(except: NumberFormatException){
-                    binding.weekZone.setText(myAgenda.week.toString())
-                    Toast.makeText(activity, "Vous devez rentrez un entier entre 1 et 52", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    val agenda = Agenda(id = 0, name = name,
+                        photo = "ma photo", week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
+
+                    profilViewModel.insert(agenda)
+                    Toast.makeText(activity, "Nouvel agenda créé.", Toast.LENGTH_SHORT).show()
                 }
 
-                Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                val agenda = Agenda(id = 0, name = name,
-                photo = "ma photo", week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
+            } catch (e : NumberFormatException) {
+                val builder: AlertDialog.Builder? = activity?.let {
+                    AlertDialog.Builder(it)
+                }
 
-                profilViewModel.insert(agenda)
+                builder?.setMessage(getString(R.string.missing_week_number))
+                    ?.setTitle(getString(R.string.error))
+                    ?.apply {
+                        setNeutralButton(getString(R.string.ok)) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                    }
+
+                val dialog: AlertDialog? = builder?.create()
+
+                dialog?.show()
+
+                if(dialog == null)
+                    Toast.makeText(activity, getString(R.string.error_missing_week_number), Toast.LENGTH_SHORT).show()
             }
         }
     }
