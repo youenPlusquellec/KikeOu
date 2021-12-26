@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec.profile
+package fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import fr.enssat.kikeou.pepin_plestan_plusquellec.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 

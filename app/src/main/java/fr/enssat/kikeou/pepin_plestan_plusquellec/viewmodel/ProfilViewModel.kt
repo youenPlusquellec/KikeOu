@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel
 
 import androidx.lifecycle.*
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda

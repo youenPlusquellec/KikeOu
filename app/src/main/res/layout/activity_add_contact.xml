@@ -7,7 +7,7 @@
     android:paddingStart="16dp"
     android:paddingTop="16dp"
     android:paddingEnd="0dp"
-    tools:context=".AddContactActivity">
+    tools:context=".activity.AddContactActivity">
 
     <TextView
         android:id="@+id/contact_title"

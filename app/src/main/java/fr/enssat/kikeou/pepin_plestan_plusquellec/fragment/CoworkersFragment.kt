@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.fragment
 
 import android.app.Activity
 import android.content.Intent
@@ -7,21 +7,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.room.Room
-import fr.enssat.kikeou.pepin_plestan_plusquellec.coworkers.CoworkerAdapter
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.CoworkerAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.FragmentCoworkersBinding
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.AppDatabase
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import fr.enssat.kikeou.pepin_plestan_plusquellec.*
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.CameraActivity
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.ProfileDetailsActivity
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
 
 class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
 

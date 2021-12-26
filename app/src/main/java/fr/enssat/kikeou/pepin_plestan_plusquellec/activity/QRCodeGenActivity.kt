@@ -1,17 +1,16 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat
-import androidx.lifecycle.Observer
-import androidx.room.Room
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.AppDatabase
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import net.glxn.qrgen.android.QRCode
 
 class QRCodeGenActivity : AppCompatActivity() {

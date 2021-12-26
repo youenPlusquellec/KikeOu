@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
 class ProfilePictureActivity : AppCompatActivity() {
     private val profilViewModel: ProfilViewModel by viewModels {

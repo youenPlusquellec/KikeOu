@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 //Naming convention: camera_layout.xml layout -> CameraLayoutBinding
 import android.app.Activity
@@ -30,6 +30,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
 
 class CameraActivity : AppCompatActivity() {

@@ -1,30 +1,26 @@
-    package fr.enssat.kikeou.pepin_plestan_plusquellec
+    package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import fr.enssat.kikeou.pepin_plestan_plusquellec.profile.ContactAdapter
-import fr.enssat.kikeou.pepin_plestan_plusquellec.profile.LocalisationAdapter
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.AppDatabase
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.ContactAdapter
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.LocalisationAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
     class ProfileDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_details)
 
-        val agendaJson = intent.getSerializableExtra("agenda");
+        val agendaJson = intent.getSerializableExtra("agenda")
 
         if (agendaJson != null)
         {

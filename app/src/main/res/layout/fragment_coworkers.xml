@@ -5,7 +5,7 @@
     android:id="@+id/qr_scan_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CoworkersFragment">
+    tools:context=".fragment.CoworkersFragment">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
