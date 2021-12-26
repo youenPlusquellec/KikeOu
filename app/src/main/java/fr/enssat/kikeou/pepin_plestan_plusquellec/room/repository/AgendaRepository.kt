@@ -3,8 +3,6 @@ package fr.enssat.kikeou.pepin_plestan_plusquellec.room.repository
 import androidx.annotation.WorkerThread
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.dao.AgendaDao
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 import kotlinx.coroutines.flow.Flow
 
 class AgendaRepository(private val agendaDao: AgendaDao) {

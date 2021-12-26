@@ -27,14 +27,14 @@
     <string name="qr_read_desc">Read Qr Code</string>
     <string name="delete_button">Supprimer</string>
     <string-array name="contact_key_array">
-        <item>telephone</item>
-        <item>email</item>
-        <item>facebook</item>
-        <item>twitter</item>
-        <item>linkedin</item>
-        <item>skype</item>
-        <item>site web</item>
-        <item>autre</item>
+        <item>Téléphone</item>
+        <item>E-mail</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>LinkedIn</item>
+        <item>Skype</item>
+        <item>Site web</item>
+        <item>Autre</item>
     </string-array>
     <string-array name="loc_days_array">
         <item>Lundi</item>
@@ -45,7 +45,7 @@
     </string-array>
     <string name="add">Ajouter</string>
     <string name="week_text">Semaine</string>
-    <string name="week_number">Samine : %1$d</string>
+    <string name="week_number">Semaine : %1$d</string>
     <string name="photo_text">Photo</string>
     <string name="photo_hint">votre photo</string>
     <string name="profile_picture_title">Choisir une photo de profil</string>

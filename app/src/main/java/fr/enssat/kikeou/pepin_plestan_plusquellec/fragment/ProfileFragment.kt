@@ -32,30 +32,18 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.FragmentProfileBin
 import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.ContactAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.LocalisationAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
-import java.util.*
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
-    private var _binding : FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding : FragmentProfileBinding
 
-    private lateinit var app: AppApplication
-
-    private val profilViewModel: ProfilViewModel by viewModels {
-        ProfilViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
+    private val profileViewModel: ProfileViewModel by viewModels {
+        ProfileViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-        app = (requireActivity().application as AppApplication)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -63,11 +51,16 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profilViewModel.agenda.observe(this, { agenda ->
+        profileViewModel.agenda.observe(this, { agenda ->
             if(agenda != null)
             {
-                binding.nameZone.setText(agenda.name)
-                binding.weekZone.setText(agenda.week.toString())
+                if(!profileViewModel.isCurrentAgendaInitialized())
+                    profileViewModel.currentAgenda = agenda
+
+                profileViewModel.currentAgenda.loc = agenda.loc
+                profileViewModel.currentAgenda.contact = agenda.contact
+
+                binding.agenda = profileViewModel.currentAgenda
 
                 Picasso.get()
                     .load(agenda.photo)
@@ -78,12 +71,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 val contactAdapter = ContactAdapter()
                 binding.contactsList.adapter = contactAdapter
                 contactAdapter.data = agenda.contact
-                contactAdapter.viewModel = profilViewModel
+                contactAdapter.viewModel = profileViewModel
 
                 val locAdapter = LocalisationAdapter()
                 binding.localisationsList.adapter = locAdapter
                 locAdapter.data = agenda.loc
-                locAdapter.viewModel = profilViewModel
+                locAdapter.viewModel = profileViewModel
             }
         })
 
@@ -110,38 +103,27 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
 
         binding.validateButton.setOnClickListener {
-            val myAgenda: Agenda? = profilViewModel.agenda.value
+            val myAgenda: Agenda = profileViewModel.currentAgenda
 
             val name = binding.nameZone.text.toString()
 
             try {
                 val weeknumber = binding.weekZone.text.toString().toInt()
 
-                if(myAgenda != null)
-                {
-                    try {
-                        if(weeknumber < 1 || weeknumber > 52) {
-                            throw NumberFormatException()
-                        } else {
-                            myAgenda.name = name
-                            myAgenda.week = weeknumber
+                try {
+                    if(weeknumber < 1 || weeknumber > 52) {
+                        throw NumberFormatException()
+                    } else {
+                        myAgenda.name = name
+                        myAgenda.week = weeknumber
 
-                            profilViewModel.update(myAgenda)
+                        profileViewModel.update(myAgenda)
 
-                            Toast.makeText(activity, R.string.your_data_saved, Toast.LENGTH_SHORT).show()
-                        }
-                    } catch(except: NumberFormatException) {
-                        binding.weekZone.setText(myAgenda.week.toString())
-                        Toast.makeText(activity, R.string.error_week_number_not_in_range, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, R.string.your_data_saved, Toast.LENGTH_SHORT).show()
                     }
-                }
-                else
-                {
-                    val agenda = Agenda(id = 0, name = name,
-                        photo = "ma photo", week = weeknumber, contact = mutableListOf<Contact>(), loc = mutableListOf<Localisation>(), is_mine = true)
-
-                    profilViewModel.insert(agenda)
-                    Toast.makeText(activity, R.string.new_schedule_created, Toast.LENGTH_SHORT).show()
+                } catch(except: NumberFormatException) {
+                    binding.weekZone.setText(myAgenda.week.toString())
+                    Toast.makeText(activity, R.string.error_week_number_not_in_range, Toast.LENGTH_SHORT).show()
                 }
 
             } catch (e : NumberFormatException) {

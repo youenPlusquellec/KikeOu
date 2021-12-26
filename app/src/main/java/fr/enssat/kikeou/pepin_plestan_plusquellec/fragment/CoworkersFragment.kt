@@ -26,11 +26,7 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
         CoworkerViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentCoworkersBinding.inflate(inflater, container, false)
         return binding.root
     }
