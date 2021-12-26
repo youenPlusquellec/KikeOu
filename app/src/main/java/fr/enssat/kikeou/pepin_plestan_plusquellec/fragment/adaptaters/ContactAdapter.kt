@@ -17,6 +17,7 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+    var isReadOnly = false
 
     var viewModel: ProfilViewModel? = null
 
@@ -29,7 +30,11 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
         holder.info.text = "${item.key} - ${item.value}"
-        holder.delete.setOnClickListener { deleteItem(position) }
+
+        if(isReadOnly)
+            holder.delete.visibility = View.GONE
+        else
+            holder.delete.setOnClickListener { deleteItem(position) }
     }
 
     override fun getItemCount() = data.size

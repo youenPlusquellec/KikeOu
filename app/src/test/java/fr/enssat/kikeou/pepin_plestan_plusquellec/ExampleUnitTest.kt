@@ -1,4 +1,4 @@
-package com.example.kikeou
+package fr.enssat.kikeou.pepin_plestan_plusquellec
 
 import org.junit.Test
 

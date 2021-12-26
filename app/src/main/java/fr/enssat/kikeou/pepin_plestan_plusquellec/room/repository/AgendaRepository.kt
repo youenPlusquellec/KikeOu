@@ -8,12 +8,10 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 import kotlinx.coroutines.flow.Flow
 
 class AgendaRepository(private val agendaDao: AgendaDao) {
-    val myAgenda : Flow<Agenda> = agendaDao.getMyAgenda()
-
     val agenda : Flow<List<Agenda>> = agendaDao.getAll()
 
-//    val myLoc : Flow<List<Localisation>> = agendaDao.getMyLoc()
-//    val myContact : Flow<List<Contact>> = agendaDao.getMyContact()
+    val myAgenda : Flow<Agenda> = agendaDao.getMyAgenda()
+    val others : Flow<List<Agenda>> = agendaDao.getAllOther()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

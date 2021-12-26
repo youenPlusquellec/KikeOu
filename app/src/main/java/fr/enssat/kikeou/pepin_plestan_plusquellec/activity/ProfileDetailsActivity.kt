@@ -1,24 +1,36 @@
-    package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
+package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.ContactAdapter
-import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.LocalisationAdapter
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
+import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.ActivityProfileDetailsBinding
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.ContactAdapter
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.LocalisationAdapter
+import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.CoworkerViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.CoworkerViewModelFactory
 
-    class ProfileDetailsActivity : AppCompatActivity() {
+class ProfileDetailsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProfileDetailsBinding
+
+    private val coworkerViewModel: CoworkerViewModel by viewModels {
+        CoworkerViewModelFactory((application as AppApplication).agendaRepository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_details)
+
+        binding =  ActivityProfileDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val agendaJson = intent.getSerializableExtra("agenda")
 
@@ -29,7 +41,8 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
             val agenda = jsonAdapter.fromJson(agendaJson.toString())
 
-            val imageView = findViewById<CircleImageView>(R.id.coworker_picture)
+            val imageView =  binding.coworkerPicture
+
             if (agenda != null) {
                 Picasso.get()
                     .load(agenda.photo)
@@ -37,21 +50,22 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.R
                     .error(R.drawable.ic_person_foreground)
                     .into(imageView)
 
-                findViewById<TextView>(R.id.name_zone).text = agenda.name
+                binding.nameZone.text = agenda.name
 
                 val contactAdapter = ContactAdapter()
-                findViewById<RecyclerView>(R.id.contacts_list).adapter = contactAdapter
+                binding.contactsList.adapter = contactAdapter
                 contactAdapter.data = agenda.contact
+                contactAdapter.isReadOnly = true
 
-                findViewById<TextView>(R.id.week).text = "Semaine ${agenda.week}"
+                binding.week.text = String.format(getString(R.string.week_number), agenda.week)
 
                 val locAdapter = LocalisationAdapter()
-                findViewById<RecyclerView>(R.id.localisations_list).adapter = locAdapter
+                binding.localisationsList.adapter = locAdapter
                 locAdapter.data = agenda.loc
+                locAdapter.isReadOnly = true
 
-                findViewById<Button>(R.id.delete_button).setOnClickListener {
-                    // TODO Delete profile in database
-                    Log.w("coucou", "coucou")
+                binding.deleteButton.setOnClickListener {
+                    coworkerViewModel.delete(agenda)
                     finish()
                 }
             }

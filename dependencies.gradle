@@ -27,7 +27,7 @@ static def addRepos(RepositoryHandler handler) {
 ext.addRepos = this.&addRepos
 
 def build_versions = [:]
-    build_versions.app_id = "com.example.kikeou"
+    build_versions.app_id = "fr.enssat.kikeou.pepin_plestan_plusquellec"
     build_versions.min_sdk = 21
     build_versions.target_sdk = 31
     build_versions.compil_sdk = 31

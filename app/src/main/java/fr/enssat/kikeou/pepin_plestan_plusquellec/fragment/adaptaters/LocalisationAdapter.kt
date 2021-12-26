@@ -22,6 +22,8 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
 
     var viewModel: ProfilViewModel? = null
 
+    var isReadOnly = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.profile_item_view, parent, false)
@@ -36,7 +38,11 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
         val day = convertNumericDayToString(item.day, res)
 
         holder.info.text = "${day} - ${item.value}"
-        holder.delete.setOnClickListener { deleteItem(position) }
+
+        if(isReadOnly)
+            holder.delete.visibility = View.GONE
+        else
+            holder.delete.setOnClickListener { deleteItem(position) }
     }
 
     override fun getItemCount() = data.size

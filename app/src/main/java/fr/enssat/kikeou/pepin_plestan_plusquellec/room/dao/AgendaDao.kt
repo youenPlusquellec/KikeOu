@@ -9,14 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AgendaDao {
-    @Query("SELECT * FROM agenda")
-    fun getAll(): Flow<List<Agenda>>
-
     @Insert
     suspend fun insert(agenda: Agenda)
 
     @Delete
-    fun delete(agenda: Agenda)
+    suspend fun delete(agenda: Agenda)
 
     @Update
     suspend fun update(agenda: Agenda)
@@ -24,12 +21,12 @@ interface AgendaDao {
     @Query("SELECT * FROM agenda WHERE is_mine = 1;")
     fun getMyAgenda(): Flow<Agenda>
 
+    @Query("SELECT * FROM agenda WHERE is_mine = 0")
+    fun getAllOther(): Flow<List<Agenda>>
+
+    @Query("SELECT * FROM agenda")
+    fun getAll(): Flow<List<Agenda>>
+
     @Query("SELECT * FROM agenda WHERE name = :name;")
     suspend fun findByName(name: String): List<Agenda>
-
-    /*@Query("SELECT contact FROM agenda WHERE is_mine IS TRUE;")
-    fun getMyContact(): Flow<List<Contact>>
-
-    @Query("SELECT loc FROM agenda WHERE is_mine IS TRUE;")
-    fun getMyLoc(): Flow<List<Localisation>>*/
 }
