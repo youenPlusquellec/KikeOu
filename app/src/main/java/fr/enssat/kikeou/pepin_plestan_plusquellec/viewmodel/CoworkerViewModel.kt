@@ -1,10 +1,8 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.repository.AgendaRepository
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
 class CoworkerViewModel(private val repository: AgendaRepository) : ViewModel() {
@@ -13,19 +11,32 @@ class CoworkerViewModel(private val repository: AgendaRepository) : ViewModel() 
     fun insertOrUpdate(agenda: Agenda) = viewModelScope.launch {
         val dbData = repository.findByName(agenda.name)
 
-        when {
-            dbData.isEmpty() -> {
-                agenda.id = 0
-                repository.insert(agenda)
+        if(dbData.isEmpty())
+        {
+            agenda.id = 0
+            repository.insert(agenda)
+        }
+        else
+        {
+            var agendaToUpdate = dbData[0].id
+
+            if(dbData.size > 1) // Case self scanning - with already on record in DB
+            {
+                for(i in dbData)
+                {
+                    if(!i.is_mine)
+                        agendaToUpdate = i.id
+                }
             }
-            dbData[0].is_mine -> {
-                agenda.id = 0
+            else if(dbData[0].is_mine) // Case self scanning - Not yet in DB
+                agendaToUpdate = 0
+
+            agenda.id = agendaToUpdate
+
+            if(agendaToUpdate == 0) // Self scanning - insert
                 repository.insert(agenda)
-            }
-            else -> {
-                agenda.id = dbData[0].id
+            else // Else it's an update
                 repository.update(agenda)
-            }
         }
     }
 
