@@ -45,7 +45,7 @@
     </string-array>
     <string name="add">Ajouter</string>
     <string name="week_text">Semaine</string>
-    <string name="week_number">Samine : %1$d</string>
+    <string name="week_number">Semaine : %1$d</string>
     <string name="photo_text">Photo</string>
     <string name="photo_hint">votre photo</string>
     <string name="profile_picture_title">Choisir une photo de profil</string>
