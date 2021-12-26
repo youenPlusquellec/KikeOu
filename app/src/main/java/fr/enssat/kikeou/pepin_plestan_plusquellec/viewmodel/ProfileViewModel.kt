@@ -7,6 +7,11 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: AgendaRepository) : ViewModel() {
     val agenda: LiveData<Agenda> = repository.myAgenda.asLiveData()
+    lateinit var currentAgenda: Agenda
+
+    fun isCurrentAgendaInitialized(): Boolean {
+        return this::currentAgenda.isInitialized
+    }
 
     fun insert(agenda: Agenda) = viewModelScope.launch {
         repository.insert(agenda)
@@ -17,15 +22,11 @@ class ProfileViewModel(private val repository: AgendaRepository) : ViewModel() {
     }
 
     fun updateLocList() = viewModelScope.launch {
-        val agenda = agenda.value
-
-        if (agenda != null) update(agenda)
+        update(currentAgenda)
     }
 
     fun updateContactList() = viewModelScope.launch {
-        val agenda = agenda.value
-
-        if(agenda != null) update(agenda)
+        update(currentAgenda)
     }
 }
 

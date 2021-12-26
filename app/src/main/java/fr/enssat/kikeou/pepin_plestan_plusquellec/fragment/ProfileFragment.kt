@@ -61,8 +61,13 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         profileViewModel.agenda.observe(this, { agenda ->
             if(agenda != null)
             {
-                binding.nameZone.setText(agenda.name)
-                binding.weekZone.setText(agenda.week.toString())
+                if(!profileViewModel.isCurrentAgendaInitialized())
+                    profileViewModel.currentAgenda = agenda
+
+                binding.agenda = profileViewModel.currentAgenda
+
+                /*binding.nameZone.setText(profileViewModel.currentAgenda.name)
+                binding.weekZone.setText(profileViewModel.currentAgenda.week.toString())*/
 
                 Picasso.get()
                     .load(agenda.photo)
@@ -72,12 +77,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
                 val contactAdapter = ContactAdapter()
                 binding.contactsList.adapter = contactAdapter
-                contactAdapter.data = agenda.contact
+                contactAdapter.data = profileViewModel.currentAgenda.contact
                 contactAdapter.viewModel = profileViewModel
 
                 val locAdapter = LocalisationAdapter()
                 binding.localisationsList.adapter = locAdapter
-                locAdapter.data = agenda.loc
+                locAdapter.data = profileViewModel.currentAgenda.loc
                 locAdapter.viewModel = profileViewModel
             }
         })
@@ -105,38 +110,27 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
 
         binding.validateButton.setOnClickListener {
-            val myAgenda: Agenda? = profileViewModel.agenda.value
+            val myAgenda: Agenda = profileViewModel.currentAgenda
 
             val name = binding.nameZone.text.toString()
 
             try {
                 val weeknumber = binding.weekZone.text.toString().toInt()
 
-                if(myAgenda != null)
-                {
-                    try {
-                        if(weeknumber < 1 || weeknumber > 52) {
-                            throw NumberFormatException()
-                        } else {
-                            myAgenda.name = name
-                            myAgenda.week = weeknumber
+                try {
+                    if(weeknumber < 1 || weeknumber > 52) {
+                        throw NumberFormatException()
+                    } else {
+                        myAgenda.name = name
+                        myAgenda.week = weeknumber
 
-                            profileViewModel.update(myAgenda)
+                        profileViewModel.update(myAgenda)
 
-                            Toast.makeText(activity, R.string.your_data_saved, Toast.LENGTH_SHORT).show()
-                        }
-                    } catch(except: NumberFormatException) {
-                        binding.weekZone.setText(myAgenda.week.toString())
-                        Toast.makeText(activity, R.string.error_week_number_not_in_range, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, R.string.your_data_saved, Toast.LENGTH_SHORT).show()
                     }
-                }
-                else
-                {
-                    val agenda = Agenda(id = 0, name = name,
-                        photo = "ma photo", week = weeknumber, contact = mutableListOf<Contact>(), loc = mutableListOf<Localisation>(), is_mine = true)
-
-                    profileViewModel.insert(agenda)
-                    Toast.makeText(activity, R.string.new_schedule_created, Toast.LENGTH_SHORT).show()
+                } catch(except: NumberFormatException) {
+                    binding.weekZone.setText(myAgenda.week.toString())
+                    Toast.makeText(activity, R.string.error_week_number_not_in_range, Toast.LENGTH_SHORT).show()
                 }
 
             } catch (e : NumberFormatException) {
