@@ -17,20 +17,25 @@ class AgendaRepository(private val agendaDao: AgendaDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(agenda: Agenda){
+    suspend fun insert(agenda: Agenda) {
         agendaDao.insert(agenda)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun update(agenda: Agenda){
+    suspend fun update(agenda: Agenda) {
         agendaDao.update(agenda)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun delete(agenda: Agenda){
+    suspend fun delete(agenda: Agenda) {
         agendaDao.delete(agenda)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun findByName(name: String): List<Agenda> {
+        return agendaDao.findByName(name)
+    }
 }

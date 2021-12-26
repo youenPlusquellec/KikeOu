@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.room.Room
 import fr.enssat.kikeou.pepin_plestan_plusquellec.coworkers.CoworkerAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.FragmentCoworkersBinding
@@ -27,6 +28,10 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
     private var _binding : FragmentCoworkersBinding? = null
     private val binding get() = _binding!!
     private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    private val profilViewModel: ProfilViewModel by viewModels {
+        ProfilViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,8 +50,8 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
 
                     val agenda = jsonAdapter.fromJson(json)
 
-                    /*if(agenda != null)
-                        Room.databaseBuilder(requireContext(), AppDatabase::class.java, "test").allowMainThreadQueries().build().agendaDao().insert(agenda)*/
+                   if(agenda != null)
+                       profilViewModel.insertOrUpdate(agenda)
                 }
             }
         }

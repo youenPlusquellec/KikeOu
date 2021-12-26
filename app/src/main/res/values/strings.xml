@@ -49,4 +49,11 @@
     <string name="photo_hint">votre photo</string>
     <string name="profile_picture_title">Choisir une photo de profil</string>
     <string name="validate">Valider</string>
+    <string name="missing_week_number">Numéro de semaine manquant !</string>
+    <string name="error">Erreur</string>
+    <string name="ok">OK</string>
+    <string name="error_missing_week_number">Erreur : numéro de semaine manquant !</string>
+    <string name="your_data_saved">Vos données ont été enregistrées</string>
+    <string name="error_week_number_not_in_range">Le numéro de semaine doit être en 1 et 52</string>
+    <string name="new_schedule_created">Nouvel agenda créé.</string>
 </resources>

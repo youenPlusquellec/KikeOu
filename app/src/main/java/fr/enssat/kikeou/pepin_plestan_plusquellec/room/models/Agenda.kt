@@ -11,7 +11,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 @Entity
 data class Agenda(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) var id: Int,
     @ColumnInfo(name="name") var name: String,
     @ColumnInfo(name="week") var week: Int,
     @ColumnInfo(name="photo") var photo: String?,

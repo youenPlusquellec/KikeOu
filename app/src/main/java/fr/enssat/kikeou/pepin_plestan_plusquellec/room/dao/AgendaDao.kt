@@ -21,8 +21,11 @@ interface AgendaDao {
     @Update
     suspend fun update(agenda: Agenda)
 
-    @Query("SELECT * FROM agenda WHERE is_mine IS TRUE;")
+    @Query("SELECT * FROM agenda WHERE is_mine = 1;")
     fun getMyAgenda(): Flow<Agenda>
+
+    @Query("SELECT * FROM agenda WHERE name = :name;")
+    suspend fun findByName(name: String): List<Agenda>
 
     /*@Query("SELECT contact FROM agenda WHERE is_mine IS TRUE;")
     fun getMyContact(): Flow<List<Contact>>
