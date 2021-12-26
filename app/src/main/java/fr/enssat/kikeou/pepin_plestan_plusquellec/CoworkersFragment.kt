@@ -51,7 +51,7 @@ class CoworkersFragment:Fragment(R.layout.fragment_coworkers) {
                     val agenda = jsonAdapter.fromJson(json)
 
                    if(agenda != null)
-                       profilViewModel.insert(agenda)
+                       profilViewModel.insertOrUpdate(agenda)
                 }
             }
         }
