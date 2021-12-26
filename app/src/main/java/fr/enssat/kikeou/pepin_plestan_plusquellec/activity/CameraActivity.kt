@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 //Naming convention: camera_layout.xml layout -> CameraLayoutBinding
 import android.app.Activity
@@ -14,6 +14,7 @@ import android.util.Log
 import android.util.Size
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
@@ -22,6 +23,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.CameraLayoutBinding
 import com.google.common.util.concurrent.ListenableFuture
@@ -30,6 +32,14 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
+import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.CoworkerViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.CoworkerViewModelFactory
+import java.lang.Exception
 
 
 class CameraActivity : AppCompatActivity() {
@@ -37,6 +47,10 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var binding: CameraLayoutBinding
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
+
+    private val coworkerViewModel: CoworkerViewModel by viewModels {
+        CoworkerViewModelFactory((application as AppApplication).agendaRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,10 +137,7 @@ class CameraActivity : AppCompatActivity() {
                                     val element = Draw(this, it.boundingBox)
                                     binding.layout.addView(element,1)
 
-                                    val data = Intent()
-                                    data.putExtra("json", it.displayValue)
-
-                                    setResult(Activity.RESULT_OK, data)
+                                    handleQrCode(it.displayValue)
                                 }
                             }
                             imageProxy.close()
@@ -149,6 +160,21 @@ class CameraActivity : AppCompatActivity() {
         },
             ContextCompat.getMainExecutor(this)
         )
+    }
+
+    private fun handleQrCode(json: String?) {
+        if (json != null)
+        {
+            try {
+                val moshi: Moshi = Moshi.Builder().build()
+                val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
+
+                val agenda = jsonAdapter.fromJson(json)
+
+                if(agenda != null)
+                    coworkerViewModel.insertOrUpdate(agenda)
+            } catch (e: Exception) {}
+        }
     }
 
     private class Draw(context: Context?, val rect: Rect?) : View(context) {

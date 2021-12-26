@@ -1,7 +1,7 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.MainActivity
 
 class MainActivityViewModel : ViewModel() {
     var currentFragment : MainActivity.Views = MainActivity.Views.Profile

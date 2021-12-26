@@ -1,22 +1,15 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.Observer
-import androidx.room.Room
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.AppDatabase
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.CoworkersFragment
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.MainActivityViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.ProfileFragment
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import kotlinx.android.synthetic.main.activity_main.view.*
-import net.glxn.qrgen.android.QRCode
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
@@ -50,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment,fragment)
+            replace(R.id.flFragment, fragment)
             commit()
         }
 

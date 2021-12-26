@@ -1,6 +1,5 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.fragment
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
@@ -19,16 +18,27 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.squareup.picasso.Picasso
+import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.AddContactActivity
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.AddLocalisationActivity
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.ProfilePictureActivity
+import fr.enssat.kikeou.pepin_plestan_plusquellec.activity.QRCodeGenActivity
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.FragmentProfileBinding
-import fr.enssat.kikeou.pepin_plestan_plusquellec.profile.ContactAdapter
-import fr.enssat.kikeou.pepin_plestan_plusquellec.profile.LocalisationAdapter
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.ContactAdapter
+import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.LocalisationAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
+import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
+import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
 import java.util.*
 
-class ProfileFragment:Fragment(R.layout.fragment_profile) {
+class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -128,7 +138,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
                 else
                 {
                     val agenda = Agenda(id = 0, name = name,
-                        photo = "ma photo", week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
+                        photo = "ma photo", week = weeknumber, contact = mutableListOf<Contact>(), loc = mutableListOf<Localisation>(), is_mine = true)
 
                     profilViewModel.insert(agenda)
                     Toast.makeText(activity, R.string.new_schedule_created, Toast.LENGTH_SHORT).show()
@@ -156,7 +166,6 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
             }
         }
     }
-
 }
 
 fun EditText.inputFilterNumberRange(range: IntRange){
@@ -166,7 +175,7 @@ fun EditText.inputFilterNumberRange(range: IntRange){
 
 class InputFilterMax(private var max: Int) : InputFilter {
     override fun filter(
-        p0: CharSequence,p1: Int,p2: Int,p3: Spanned?,p4: Int,p5: Int
+        p0: CharSequence, p1: Int, p2: Int, p3: Spanned?, p4: Int, p5: Int
     ): CharSequence? {
         try {
             val replacement = p0.subSequence(p1, p2).toString()

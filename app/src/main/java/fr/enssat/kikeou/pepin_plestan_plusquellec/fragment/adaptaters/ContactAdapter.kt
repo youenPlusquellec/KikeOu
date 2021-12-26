@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec.profile
+package fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import fr.enssat.kikeou.pepin_plestan_plusquellec.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
 
@@ -17,10 +17,11 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+    var isReadOnly = false
 
     var viewModel: ProfilViewModel? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.profile_item_view, parent, false)
         return ViewHolder(view)
@@ -29,7 +30,11 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
         holder.info.text = "${item.key} - ${item.value}"
-        holder.delete.setOnClickListener { deleteItem(position) }
+
+        if(isReadOnly)
+            holder.delete.visibility = View.GONE
+        else
+            holder.delete.setOnClickListener { deleteItem(position) }
     }
 
     override fun getItemCount() = data.size

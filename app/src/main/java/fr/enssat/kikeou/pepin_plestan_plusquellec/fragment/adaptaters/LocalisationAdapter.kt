@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec.profile
+package fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import fr.enssat.kikeou.pepin_plestan_plusquellec.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 
@@ -21,6 +21,8 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
         }
 
     var viewModel: ProfilViewModel? = null
+
+    var isReadOnly = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,7 +38,11 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
         val day = convertNumericDayToString(item.day, res)
 
         holder.info.text = "${day} - ${item.value}"
-        holder.delete.setOnClickListener { deleteItem(position) }
+
+        if(isReadOnly)
+            holder.delete.visibility = View.GONE
+        else
+            holder.delete.setOnClickListener { deleteItem(position) }
     }
 
     override fun getItemCount() = data.size

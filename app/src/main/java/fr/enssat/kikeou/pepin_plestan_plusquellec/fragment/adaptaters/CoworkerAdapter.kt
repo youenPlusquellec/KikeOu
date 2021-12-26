@@ -1,6 +1,5 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec.coworkers
+package fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 
 class CoworkerAdapter : RecyclerView.Adapter<CoworkerAdapter.ViewHolder>() {
 

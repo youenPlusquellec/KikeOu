@@ -1,4 +1,4 @@
-package fr.enssat.kikeou.pepin_plestan_plusquellec
+package fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel
 
 import androidx.lifecycle.*
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
@@ -14,25 +14,6 @@ class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
 
     fun update(agenda: Agenda) = viewModelScope.launch {
         repository.update(agenda)
-    }
-
-    fun insertOrUpdate(agenda: Agenda) = viewModelScope.launch {
-        val dbData = repository.findByName(agenda.name)
-
-        when {
-            dbData.isEmpty() -> {
-                agenda.id = 0
-                insert(agenda)
-            }
-            dbData[0].is_mine -> {
-                agenda.id = 0
-                insert(agenda)
-            }
-            else -> {
-                agenda.id = dbData[0].id
-                update(agenda)
-            }
-        }
     }
 
     fun updateLocList() = viewModelScope.launch {
