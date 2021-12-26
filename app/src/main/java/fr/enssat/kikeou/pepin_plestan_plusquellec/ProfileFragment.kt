@@ -117,14 +117,13 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
                             myAgenda.week = weeknumber
 
                             profilViewModel.update(myAgenda)
-                        }
 
+                            Toast.makeText(activity, R.string.your_data_saved, Toast.LENGTH_SHORT).show()
+                        }
                     } catch(except: NumberFormatException) {
                         binding.weekZone.setText(myAgenda.week.toString())
-                        Toast.makeText(activity, "Vous devez rentrez un entier entre 1 et 52", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, R.string.error_week_number_not_in_range, Toast.LENGTH_SHORT).show()
                     }
-
-                    Toast.makeText(activity, "Vos données ont été enregistrées", Toast.LENGTH_SHORT).show()
                 }
                 else
                 {
@@ -132,7 +131,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
                         photo = "ma photo", week = weeknumber, contact = LinkedList(), loc = LinkedList(), is_mine = true)
 
                     profilViewModel.insert(agenda)
-                    Toast.makeText(activity, "Nouvel agenda créé.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.new_schedule_created, Toast.LENGTH_SHORT).show()
                 }
 
             } catch (e : NumberFormatException) {
@@ -153,7 +152,7 @@ class ProfileFragment:Fragment(R.layout.fragment_profile) {
                 dialog?.show()
 
                 if(dialog == null)
-                    Toast.makeText(activity, getString(R.string.error_missing_week_number), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.error_missing_week_number, Toast.LENGTH_SHORT).show()
             }
         }
     }
