@@ -8,12 +8,12 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
 class ProfilePictureActivity : AppCompatActivity() {
     private val profileViewModel: ProfileViewModel by viewModels {
-        ProfilViewModelFactory((application as AppApplication).agendaRepository)
+        ProfileViewModelFactory((application as AppApplication).agendaRepository)
     }
 
     val profile_pictures = arrayOf<String>(

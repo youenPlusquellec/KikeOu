@@ -8,13 +8,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
 
 class AddContactActivity : AppCompatActivity() {
     private val profileViewModel: ProfileViewModel by viewModels {
-        ProfilViewModelFactory((application as AppApplication).agendaRepository)
+        ProfileViewModelFactory((application as AppApplication).agendaRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

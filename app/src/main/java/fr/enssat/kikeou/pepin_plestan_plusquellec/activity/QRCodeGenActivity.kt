@@ -9,13 +9,13 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import net.glxn.qrgen.android.QRCode
 
 class QRCodeGenActivity : AppCompatActivity() {
     private val profileViewModel: ProfileViewModel by viewModels {
-        ProfilViewModelFactory((application as AppApplication).agendaRepository)
+        ProfileViewModelFactory((application as AppApplication).agendaRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

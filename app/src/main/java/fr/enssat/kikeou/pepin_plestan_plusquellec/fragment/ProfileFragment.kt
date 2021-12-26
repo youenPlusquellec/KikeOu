@@ -35,7 +35,7 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private var _binding : FragmentProfileBinding? = null
@@ -44,7 +44,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private lateinit var app: AppApplication
 
     private val profileViewModel: ProfileViewModel by viewModels {
-        ProfilViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
+        ProfileViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
