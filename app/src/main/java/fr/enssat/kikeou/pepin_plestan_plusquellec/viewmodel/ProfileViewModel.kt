@@ -22,10 +22,19 @@ class ProfileViewModel(private val repository: AgendaRepository) : ViewModel() {
     }
 
     fun updateLocList() = viewModelScope.launch {
+        val temp: Agenda? = agenda.value
+
+        if(temp != null)
+            currentAgenda.loc = temp.loc
         update(currentAgenda)
     }
 
     fun updateContactList() = viewModelScope.launch {
+        val temp: Agenda? = agenda.value
+
+        if(temp != null)
+            currentAgenda.contact = temp.contact
+
         update(currentAgenda)
     }
 }

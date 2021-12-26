@@ -3,20 +3,22 @@ package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.gridlayout.widget.GridLayout
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
+import fr.enssat.kikeou.pepin_plestan_plusquellec.R
+import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.ActivityProfilePictureBinding
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
-import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
 class ProfilePictureActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProfilePictureBinding
+
     private val profileViewModel: ProfileViewModel by viewModels {
         ProfileViewModelFactory((application as AppApplication).agendaRepository)
     }
 
-    val profile_pictures = arrayOf<String>(
+    val profile_pictures = arrayOf(
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJTgOgt3wKhEdCEXL4EKkypl4l-iNhkSaew&usqp=CAU",
         "https://avatarfiles.alphacoders.com/924/92441.jpg",
         "https://i.pinimg.com/474x/b0/be/5b/b0be5b4733de3d6e19ba9bd9322224d6.jpg",
@@ -33,9 +35,13 @@ class ProfilePictureActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_picture)
 
-        val gridLayout = findViewById<GridLayout>(R.id.profile_pictures_list)
+        binding = ActivityProfilePictureBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        val gridLayout = binding.profilePicturesList
+
         for (i in 0..gridLayout.childCount) {
             val item = gridLayout.getChildAt(i)
             if (item is CircleImageView) {

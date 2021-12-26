@@ -32,25 +32,18 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.FragmentProfileBin
 import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.ContactAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.fragment.adaptaters.LocalisationAdapter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
-    private var _binding : FragmentProfileBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var app: AppApplication
+    private lateinit var binding : FragmentProfileBinding
 
     private val profileViewModel: ProfileViewModel by viewModels {
         ProfileViewModelFactory((requireActivity().application as AppApplication).agendaRepository)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-        app = (requireActivity().application as AppApplication)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -64,10 +57,10 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 if(!profileViewModel.isCurrentAgendaInitialized())
                     profileViewModel.currentAgenda = agenda
 
-                binding.agenda = profileViewModel.currentAgenda
+                profileViewModel.currentAgenda.loc = agenda.loc
+                profileViewModel.currentAgenda.contact = agenda.contact
 
-                /*binding.nameZone.setText(profileViewModel.currentAgenda.name)
-                binding.weekZone.setText(profileViewModel.currentAgenda.week.toString())*/
+                binding.agenda = profileViewModel.currentAgenda
 
                 Picasso.get()
                     .load(agenda.photo)
@@ -77,12 +70,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
                 val contactAdapter = ContactAdapter()
                 binding.contactsList.adapter = contactAdapter
-                contactAdapter.data = profileViewModel.currentAgenda.contact
+                contactAdapter.data = agenda.contact
                 contactAdapter.viewModel = profileViewModel
 
                 val locAdapter = LocalisationAdapter()
                 binding.localisationsList.adapter = locAdapter
-                locAdapter.data = profileViewModel.currentAgenda.loc
+                locAdapter.data = agenda.loc
                 locAdapter.viewModel = profileViewModel
             }
         })

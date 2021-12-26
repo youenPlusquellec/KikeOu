@@ -5,16 +5,13 @@ import android.text.InputType
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.EditText
-import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
-import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.ActivityAddContactBinding
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModelFactory
 
 class AddContactActivity : AppCompatActivity(), OnItemSelectedListener {
     private lateinit var binding: ActivityAddContactBinding
@@ -33,8 +30,8 @@ class AddContactActivity : AppCompatActivity(), OnItemSelectedListener {
         binding.contactKey.onItemSelectedListener = this
 
         binding.AddButton.setOnClickListener {
-            val key : String = findViewById<Spinner>(R.id.contact_key).selectedItem.toString()
-            val value : String = findViewById<EditText>(R.id.contact_value).text.toString()
+            val key : String = binding.contactKey.selectedItem.toString()
+            val value : String = binding.contactValue.text.toString()
 
             profileViewModel.agenda.observe(this, { agenda ->
                 val prev : Contact? = agenda.contact.find { e -> e.key == key }

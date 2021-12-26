@@ -1,15 +1,11 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.ActivityProfileDetailsBinding

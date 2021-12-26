@@ -1,20 +1,20 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec.room
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.asLiveData
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.converters.ListContactConverter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.converters.ListLocalisationConverter
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.dao.AgendaDao
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.dao.ContactDao
-import fr.enssat.kikeou.pepin_plestan_plusquellec.room.dao.LocalisationDao
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -22,8 +22,6 @@ import kotlinx.coroutines.launch
 @Database(entities = [Agenda::class, Contact::class, Localisation::class], version = 1)
 abstract class AppDatabase: RoomDatabase(){
     abstract fun agendaDao(): AgendaDao
-    abstract fun contactDao(): ContactDao
-    abstract fun localisationDao(): LocalisationDao
 
     private class AgendaDatabaseCallback(
         private val scope: CoroutineScope
@@ -38,15 +36,8 @@ abstract class AppDatabase: RoomDatabase(){
                     val agenda: Agenda? = agendaDao.getMyAgenda().asLiveData().value
 
                     if (agenda == null) {
-                        Log.d("Mon agenda","Y'a R fraire")
                         val myAgenda = Agenda(0, "Unknown", 1, "Votre photo", mutableListOf<Contact>(), mutableListOf<Localisation>(), true)
                         agendaDao.insert(myAgenda)
-                    }else{
-                        Log.d("Mon agenda", agenda.name)
-                        val moshi: Moshi = Moshi.Builder().build()
-                        val jsonAdapter: JsonAdapter<Agenda> = moshi.adapter(Agenda::class.java)
-                        val json : String = jsonAdapter.toJson(agenda)
-                        Log.d("JSON", json)
                     }
                 }
             }

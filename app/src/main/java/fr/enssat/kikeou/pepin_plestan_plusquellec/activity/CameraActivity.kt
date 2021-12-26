@@ -1,9 +1,6 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec.activity
 
-//Naming convention: camera_layout.xml layout -> CameraLayoutBinding
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Canvas
 import android.graphics.Color
@@ -23,9 +20,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.CameraLayoutBinding
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
@@ -36,10 +31,10 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
+import fr.enssat.kikeou.pepin_plestan_plusquellec.databinding.CameraLayoutBinding
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.CoworkerViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.CoworkerViewModelFactory
-import java.lang.Exception
 
 
 class CameraActivity : AppCompatActivity() {

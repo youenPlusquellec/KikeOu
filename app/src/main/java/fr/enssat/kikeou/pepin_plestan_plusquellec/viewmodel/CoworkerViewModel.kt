@@ -1,10 +1,8 @@
 package fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.repository.AgendaRepository
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
 class CoworkerViewModel(private val repository: AgendaRepository) : ViewModel() {
