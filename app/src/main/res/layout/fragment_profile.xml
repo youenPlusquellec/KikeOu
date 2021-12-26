@@ -94,13 +94,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:autofillHints="name"
                         android:ems="10"
                         android:hint="@string/name_hint"
                         android:inputType="textPersonName"
                         android:textSize="20sp"
                         tools:ignore="TextContrastCheck"
-                        android:text="@={agenda.name}"/>
+                        android:text="@={agenda.name}"
+                        android:importantForAutofill="no" />
                 </LinearLayout>
 
                 <LinearLayout

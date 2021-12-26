@@ -27,14 +27,14 @@
     <string name="qr_read_desc">Read Qr Code</string>
     <string name="delete_button">Supprimer</string>
     <string-array name="contact_key_array">
-        <item>telephone</item>
-        <item>email</item>
-        <item>facebook</item>
-        <item>twitter</item>
-        <item>linkedin</item>
-        <item>skype</item>
-        <item>site web</item>
-        <item>autre</item>
+        <item>Téléphone</item>
+        <item>E-mail</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>LinkedIn</item>
+        <item>Skype</item>
+        <item>Site web</item>
+        <item>Autre</item>
     </string-array>
     <string-array name="loc_days_array">
         <item>Lundi</item>
