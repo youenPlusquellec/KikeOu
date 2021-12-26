@@ -7,13 +7,13 @@ import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 
 class AddLocalisationActivity : AppCompatActivity() {
-    private val profilViewModel: ProfilViewModel by viewModels {
+    private val profileViewModel: ProfileViewModel by viewModels {
         ProfilViewModelFactory((application as AppApplication).agendaRepository)
     }
 
@@ -35,7 +35,7 @@ class AddLocalisationActivity : AppCompatActivity() {
 
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
 
-            profilViewModel.agenda.observe(this, { agenda ->
+            profileViewModel.agenda.observe(this, { agenda ->
                 if(agenda != null)
                 {
                     val prev : Localisation? = agenda.loc.find { e -> e.day == day }
@@ -45,7 +45,7 @@ class AddLocalisationActivity : AppCompatActivity() {
                     else
                         prev.value = value
 
-                    profilViewModel.update(agenda)
+                    profileViewModel.update(agenda)
                 }
             })
 

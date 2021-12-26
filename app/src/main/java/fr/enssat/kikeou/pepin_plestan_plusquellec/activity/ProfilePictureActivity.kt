@@ -7,12 +7,12 @@ import androidx.gridlayout.widget.GridLayout
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 
 class ProfilePictureActivity : AppCompatActivity() {
-    private val profilViewModel: ProfilViewModel by viewModels {
+    private val profileViewModel: ProfileViewModel by viewModels {
         ProfilViewModelFactory((application as AppApplication).agendaRepository)
     }
 
@@ -48,9 +48,9 @@ class ProfilePictureActivity : AppCompatActivity() {
                 item.setTag(i)
 
                 item.setOnClickListener {
-                    profilViewModel.agenda.observe(this, { agenda ->
+                    profileViewModel.agenda.observe(this, { agenda ->
                         agenda.photo = profile_pictures[it.tag as Int]
-                        profilViewModel.update(agenda)
+                        profileViewModel.update(agenda)
                         finish()
                     })
                 }

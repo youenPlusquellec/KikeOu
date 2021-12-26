@@ -7,13 +7,13 @@ import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import fr.enssat.kikeou.pepin_plestan_plusquellec.AppApplication
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModelFactory
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Contact
 
 class AddContactActivity : AppCompatActivity() {
-    private val profilViewModel: ProfilViewModel by viewModels {
+    private val profileViewModel: ProfileViewModel by viewModels {
         ProfilViewModelFactory((application as AppApplication).agendaRepository)
     }
 
@@ -25,7 +25,7 @@ class AddContactActivity : AppCompatActivity() {
             val key : String = findViewById<Spinner>(R.id.contact_key).selectedItem.toString()
             val value : String = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
 
-            profilViewModel.agenda.observe(this, { agenda ->
+            profileViewModel.agenda.observe(this, { agenda ->
                 val prev : Contact? = agenda.contact.find { e -> e.key == key }
 
                 if(prev == null)
@@ -33,7 +33,7 @@ class AddContactActivity : AppCompatActivity() {
                 else
                     prev.value = value
 
-                profilViewModel.update(agenda)
+                profileViewModel.update(agenda)
             })
 
             finish()

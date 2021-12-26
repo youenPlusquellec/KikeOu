@@ -5,7 +5,7 @@ import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Agenda
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.repository.AgendaRepository
 import kotlinx.coroutines.launch
 
-class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
+class ProfileViewModel(private val repository: AgendaRepository) : ViewModel() {
     val agenda: LiveData<Agenda> = repository.myAgenda.asLiveData()
 
     fun insert(agenda: Agenda) = viewModelScope.launch {
@@ -31,9 +31,9 @@ class ProfilViewModel(private val repository: AgendaRepository) : ViewModel() {
 
 class ProfilViewModelFactory(private val repository: AgendaRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ProfilViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ProfilViewModel(repository) as T
+            return ProfileViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfilViewModel
+import fr.enssat.kikeou.pepin_plestan_plusquellec.viewmodel.ProfileViewModel
 import fr.enssat.kikeou.pepin_plestan_plusquellec.R
 import fr.enssat.kikeou.pepin_plestan_plusquellec.room.models.Localisation
 
@@ -20,7 +20,7 @@ class LocalisationAdapter : RecyclerView.Adapter<LocalisationAdapter.ViewHolder>
             notifyDataSetChanged()
         }
 
-    var viewModel: ProfilViewModel? = null
+    var viewModel: ProfileViewModel? = null
 
     var isReadOnly = false
 
