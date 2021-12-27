@@ -1,3 +1,60 @@
 <resources>
     <string name="app_name">KikeOu</string>
+    <string name="permissionToGrant">you have to grant camera permission to use this sample</string>
+    <string name="profile_title">Mon profil</string>
+    <string name="profile_details_title">Son profil</string>
+    <string name="coworkers_title">Mes collègues</string>
+    <string name="add_contact_title">Ajouter un contact</string>
+    <string name="add_localisation_title">Ajouter une localisation</string>
+    <string name="bottom_nav_menu_profile">Mon profil</string>
+    <string name="bottom_nav_menu_coworkers">Mes collègues</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_text">Nom : </string>
+    <string name="name_hint">Mon nom</string>
+    <string name="add_contact_hint">Add contact</string>
+    <string name="add_localisation_hint">Add localisation</string>
+    <string name="week_hint">Semaine</string>
+    <string name="contact_text">Moyen de contact : </string>
+    <string name="loc_text">Localisation : </string>
+    <string name="default_description">description</string>
+    <string name="puce">&#8226;</string>
+    <string name="day1">Lundi</string>
+    <string name="day2">Mardi</string>
+    <string name="day3">Mercredi</string>
+    <string name="day4">Jeudi</string>
+    <string name="day5">Vendredi</string>
+    <string name="qr_gen_desc">Generate QR Code</string>
+    <string name="qr_read_desc">Read Qr Code</string>
+    <string name="delete_button">Supprimer</string>
+    <string-array name="contact_key_array">
+        <item>Téléphone</item>
+        <item>E-mail</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>LinkedIn</item>
+        <item>Skype</item>
+        <item>Site web</item>
+        <item>Autre</item>
+    </string-array>
+    <string-array name="loc_days_array">
+        <item>Lundi</item>
+        <item>Mardi</item>
+        <item>Mercredi</item>
+        <item>Jeudi</item>
+        <item>Vendredi</item>
+    </string-array>
+    <string name="add">Ajouter</string>
+    <string name="week_text">Semaine</string>
+    <string name="week_number">Semaine : %1$d</string>
+    <string name="photo_text">Photo</string>
+    <string name="photo_hint">votre photo</string>
+    <string name="profile_picture_title">Choisir une photo de profil</string>
+    <string name="validate">Valider</string>
+    <string name="missing_week_number">Numéro de semaine manquant !</string>
+    <string name="error">Erreur</string>
+    <string name="ok">OK</string>
+    <string name="error_missing_week_number">Erreur : numéro de semaine manquant !</string>
+    <string name="your_data_saved">Vos données ont été enregistrées</string>
+    <string name="error_week_number_not_in_range">Le numéro de semaine doit être en 1 et 52</string>
+    <string name="new_schedule_created">Nouvel agenda créé.</string>
 </resources>
